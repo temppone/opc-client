@@ -1,33 +1,17 @@
 import React from "react";
 import { ThemeProvider } from "styled-components";
-import Button from "./components/Button";
+import Carousel from "./components/Carousel";
 import { GlobalStyles } from "./styles/global";
 import { mainTheme } from "./styles/theme";
-import { ChevronRight } from "@styled-icons/fa-solid/ChevronRight";
+import Header from "./components/Header/index";
 
 function App() {
   return (
-    <div className="App">
+    <div style={{ background: "#77C3FD", height: "100vh" }} className="App">
       <ThemeProvider theme={mainTheme}>
+        <Header />
         <GlobalStyles />
-        <Button
-          onClick={() => console.log("teste")}
-          children="Avançar"
-          color="yellow"
-        />
-
-        <Button
-          onClick={() => console.log("teste")}
-          color="darkYellow"
-          icon={<ChevronRight size={20} />}
-        />
-
-        <Button
-          onClick={() => console.log("teste")}
-          color="darkYellow"
-          children="COMEÇAR!"
-          arrow
-        />
+        <Carousel />
       </ThemeProvider>
     </div>
   );

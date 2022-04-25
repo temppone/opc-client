@@ -44,7 +44,7 @@ const ContainerModifiers = {
     align-items: center;
 
     padding: 0;
-    font-weight: ${theme.font.weight.xxlarge};
+    font-weight: ${theme.font.weight.large};
     border-radius: ${theme.border.radius.small};
     background-color: ${theme.colors.secondary.main};
     font-size: ${theme.font.sizes.small};
