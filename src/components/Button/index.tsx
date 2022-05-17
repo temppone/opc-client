@@ -10,6 +10,8 @@ export interface IButton {
   onClick: () => void;
   fullWidth?: boolean;
   icon?: ReactNode;
+  backgroundLess?: boolean;
+  disabled?: boolean;
 }
 
 const Button = ({
@@ -20,9 +22,13 @@ const Button = ({
   color = "yellow",
   arrow = false,
   size = "medium",
+  disabled,
+  backgroundLess,
 }: IButton) => {
   return (
     <S.Container
+      disabled={disabled}
+      backgroundLess={backgroundLess}
       fullWidth={fullWidth}
       size={size}
       onClick={onClick}

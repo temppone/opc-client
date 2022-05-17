@@ -3,7 +3,7 @@ import { IButton } from "./index";
 
 type ContainerProps = { hasIcon: boolean } & Pick<
   IButton,
-  "size" | "fullWidth" | "color" | "arrow"
+  "size" | "fullWidth" | "color" | "arrow" | "backgroundLess" | "disabled"
 >;
 
 const ContainerModifiers = {
@@ -23,6 +23,7 @@ const ContainerModifiers = {
   withIcon: (theme: DefaultTheme) => css`
     svg {
       width: 2rem;
+      height: 2rem;
 
       & + span {
         margin-left: ${theme.spacings.xxsmall};
@@ -31,7 +32,7 @@ const ContainerModifiers = {
   `,
 
   yellow: (theme: DefaultTheme) => css`
-    background-color: ${theme.colors.secondary.main};
+    background-color: ${theme.colors.secondary.dark};
   `,
 
   darkYellow: (theme: DefaultTheme) => css`
@@ -53,11 +54,19 @@ const ContainerModifiers = {
       padding: 0 2rem;
     }
   `,
+
+  backgroundLess: (theme: DefaultTheme) => css`
+    font-size: ${theme.font.sizes.xxsmall};
+    letter-spacing: 2px;
+    font-weight: ${theme.font.weight.large};
+    color: ${theme.colors.typography.main};
+    background-color: transparent;
+  `,
 };
 
 export const Container = styled.button<ContainerProps>`
-  ${({ theme, size, fullWidth, hasIcon, color, arrow }) => css`
-    background-color: ${theme.colors.secondary.main};
+  ${({ theme, size, fullWidth, hasIcon, color, arrow, backgroundLess }) => css`
+    background-color: ${theme.colors.secondary.dark};
     color: ${theme.colors.typography.dark};
     border: none;
     border-radius: ${theme.border.radius.large};
@@ -71,6 +80,7 @@ export const Container = styled.button<ContainerProps>`
     ${!!hasIcon && ContainerModifiers.withIcon(theme)};
     ${!!color && ContainerModifiers[color](theme)};
     ${!!arrow && ContainerModifiers.arrow(theme)};
+    ${!!backgroundLess && ContainerModifiers.backgroundLess(theme)};
   `};
 `;
 
