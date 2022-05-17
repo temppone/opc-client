@@ -8,6 +8,12 @@ interface IBar {
   active: boolean;
 }
 
+interface IStartButton {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  items: any[];
+  activeIndex: number;
+}
+
 export const Container = styled.div`
   padding-top: 10rem;
   overflow: hidden;
@@ -58,6 +64,7 @@ export const Title = styled.h1`
     color: ${theme.colors.white};
     font-size: ${theme.font.sizes.large};
     font-weight: ${theme.font.weight.medium};
+    padding-top: ${theme.spacings.xxsmall};
   `}
 `;
 
@@ -74,18 +81,18 @@ export const Description = styled.div`
   `}
 `;
 
-export const Buttons = styled.div`
+export const Indicators = styled.div`
   display: flex;
   justify-content: center;
   gap: ${({ theme }) => theme.spacings.small};
   width: 100%;
-  padding: ${({ theme }) => theme.spacings.medium};
+  padding: ${({ theme }) => theme.spacings.large};
 `;
 
 export const Bar = styled.div<IBar>`
   content: " ";
   background-color: ${({ theme, active }) =>
-    active ? theme.colors.primary.dark : "#1E89DB"};
+    active ? "#1E89DB" : theme.colors.primary.dark};
   width: 48px;
   height: 3px;
 `;
@@ -101,14 +108,12 @@ export const JumpButton = styled.div`
   `}
 `;
 
-export const StartButton = styled.div`
-  ${({ theme }) => css`
-    display: flex;
+export const StartButton = styled.div<IStartButton>`
+  ${({ items, activeIndex }) => css`
+    display: ${items.length - 1 === activeIndex ? "flex" : "none"};
     justify-content: center;
     gap: ${({ theme }) => theme.spacings.small};
     width: 100%;
     padding: ${({ theme }) => theme.spacings.medium};
-
-    transition: all 0.3s;
   `}
 `;

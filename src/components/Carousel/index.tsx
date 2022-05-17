@@ -1,5 +1,6 @@
 import { ChevronRight } from "@styled-icons/fa-solid";
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useSwipeable } from "react-swipeable";
 import primary from "../../assets/Carousel/1.svg";
 import secondary from "../../assets/Carousel/2.svg";
@@ -34,6 +35,7 @@ const items = [
 const Carousel = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [paused, setPaused] = useState(false);
+  const navigate = useNavigate();
 
   const updateItem = (newIndex: number) => {
     if (newIndex < 0) {
@@ -50,12 +52,12 @@ const Carousel = () => {
       if (!paused) {
         updateItem(activeIndex + 1);
       }
-    }, 3000);
+    }, 4000);
 
     return () => {
       clearInterval(interval);
     };
-  }, [activeIndex]);
+  }, [activeIndex, paused]);
 
   const handless = useSwipeable({
     onSwipedLeft: () => {
@@ -74,9 +76,9 @@ const Carousel = () => {
       onMouseLeave={() => setPaused(false)}
     >
       <S.Inner activeIndex={activeIndex}>
-        {items.map((item) => {
+        {items.map((item, index) => {
           return (
-            <S.Item>
+            <S.Item key={index}>
               <S.ItemContainer>
                 <S.Image src={item.image} />
                 <S.Title>{item.title}</S.Title>
@@ -87,7 +89,7 @@ const Carousel = () => {
         })}
       </S.Inner>
 
-      <S.Buttons>
+      <S.Indicators>
         {items.map((item, index) => {
           return (
             <S.Bar
@@ -97,22 +99,20 @@ const Carousel = () => {
             />
           );
         })}
-      </S.Buttons>
+      </S.Indicators>
 
-      <S.StartButton>
-        {items.length - 1 === activeIndex && (
-          <Button
-            onClick={() => console.log("teste")}
-            color="darkYellow"
-            icon={<ChevronRight size={20} />}
-            arrow
-          >
-            VAMOS LÁ!
-          </Button>
-        )}
+      <S.StartButton items={items} activeIndex={activeIndex}>
+        <Button
+          onClick={() => navigate("/wizard")}
+          color="darkYellow"
+          icon={<ChevronRight size={20} />}
+          arrow
+        >
+          VAMOS LÁ!
+        </Button>
       </S.StartButton>
 
-      <S.JumpButton>PULAR</S.JumpButton>
+      <S.JumpButton>{activeIndex === 2 ? "VOLTAR" : "PULAR"}</S.JumpButton>
     </S.Container>
   );
 };
