@@ -3,7 +3,7 @@ import { DefaultTheme } from "styled-components";
 export const mainTheme: DefaultTheme = {
   border: {
     radius: {
-      small: "2px",
+      small: "5px",
       medium: "10px",
       large: "19px",
     },
@@ -21,6 +21,7 @@ export const mainTheme: DefaultTheme = {
       xlarge: 700,
       xxlarge: 800,
     },
+
     sizes: {
       xxxsmall: "1rem",
       xxsmall: "1.4rem",
@@ -48,7 +49,10 @@ export const mainTheme: DefaultTheme = {
       main: "#55646F",
       dark: "#0C2232",
     },
-    background: "#F3F3F3",
+    background: {
+      main: "#F3F3F3",
+      dark: "#D1D3D4",
+    },
     white: "#FFFFFE",
   },
 

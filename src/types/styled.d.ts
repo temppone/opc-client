@@ -44,7 +44,7 @@ declare module "styled-components" {
       primary: ColorShade;
       secondary: ColorShade;
       typography: ColorShade;
-      background: string;
+      background: ColorShade;
       white: string;
     };
 
