@@ -3,9 +3,11 @@ import calendar, {
   CALENDAR_MONTHS,
   isDate,
   isSameDay,
+  isSameMonth,
 } from "../../utils/calendar";
 import * as S from "./styles";
 import { WEEK_DAYS } from "./../../utils/calendar";
+import { Sd } from "@styled-icons/material";
 
 interface ICalendar {
   date: Date;
@@ -76,8 +78,8 @@ const Calendar = ({ date, onChangeDate }: ICalendar) => {
     );
   };
 
-  const renderDayLabel = (day: number, index: number) => {
-    const dayLabel = Object.keys(WEEK_DAYS)[day].toLocaleUpperCase();
+  const renderDayLabel = (day: string, index: number) => {
+    const dayLabel = Object.keys(WEEK_DAYS)[index];
 
     return (
       <S.Day key={dayLabel} index={index}>
@@ -90,15 +92,38 @@ const Calendar = ({ date, onChangeDate }: ICalendar) => {
     const { current, month, year } = dateState;
     const newDate = new Date(date.join("-"));
     const isToday = isSameDay(newDate, today);
+    const isCurrent = isSameDay(newDate, current);
+    const inMonth =
+      month &&
+      year &&
+      isSameMonth(newDate, new Date([year, month, 1].join("-")));
+
+    const onClick = () => {
+      // goToDate(newDate);
+    };
+    const highlightCell = isCurrent
+      ? "highlighted"
+      : isToday
+      ? "today"
+      : "default";
+
+    const props = { index, inMonth, onClick, title: newDate.toDateString() };
+
+    return (
+      <S.Date highlight={highlightCell} {...props}>
+        {newDate.getDate()}
+      </S.Date>
+    );
   };
 
   return (
     <S.Container>
       {renderMonthAndYear()}
       <S.CalendarGrid>
-        {renderDayLabel(2, 7)}
-        {/* <>{Object.keys(WEEK_DAYS).map(renderDayLabel)}</>
-        <>{getCalendarDates().map(renderCalendarDate)}</> */}
+        {
+          <>{Object.keys(WEEK_DAYS).map(renderDayLabel)}</>
+          /*<>{getCalendarDates().map(renderCalendarDate)}</> */
+        }
       </S.CalendarGrid>
     </S.Container>
   );
