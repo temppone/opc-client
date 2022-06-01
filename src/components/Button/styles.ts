@@ -62,10 +62,25 @@ const ContainerModifiers = {
     color: ${theme.colors.typography.main};
     background-color: transparent;
   `,
+
+  disabled: (theme: DefaultTheme) => css`
+    cursor: not-allowed;
+    opacity: 0.5;
+    background-color: ${theme.colors.typography.darker};
+  `,
 };
 
 export const Container = styled.button<ContainerProps>`
-  ${({ theme, size, fullWidth, hasIcon, color, arrow, backgroundLess }) => css`
+  ${({
+    theme,
+    size,
+    fullWidth,
+    hasIcon,
+    color,
+    arrow,
+    backgroundLess,
+    disabled,
+  }) => css`
     background-color: ${theme.colors.secondary.dark};
     color: ${theme.colors.typography.dark};
     border: none;
@@ -81,6 +96,7 @@ export const Container = styled.button<ContainerProps>`
     ${!!color && ContainerModifiers[color](theme)};
     ${!!arrow && ContainerModifiers.arrow(theme)};
     ${!!backgroundLess && ContainerModifiers.backgroundLess(theme)};
+    ${!!disabled && ContainerModifiers.disabled(theme)};
   `};
 `;
 
