@@ -82,4 +82,10 @@ export const questions = [
       },
     ],
   },
+
+  {
+    id: 6,
+    question: "Qual o prazo de finalização do projeto?",
+    type: "date",
+  },
 ];

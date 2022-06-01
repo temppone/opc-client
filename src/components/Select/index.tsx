@@ -1,5 +1,5 @@
 import { ChevronDown } from "@styled-icons/fa-solid";
-import React, { ChangeEvent, useRef, useState } from "react";
+import React, { ChangeEvent, useEffect, useRef, useState } from "react";
 import useOnClickOutside from "../../hooks/useOutsideClick";
 import * as S from "./styles";
 
@@ -16,10 +16,10 @@ export interface ISelect {
   items: Item[];
   multiple?: boolean;
   showOptions?: boolean;
-  onChange?: (e: ChangeEvent<HTMLSelectElement>) => void;
+  onChange: (value: string) => void;
 }
 
-const Select = ({ placeholder, defaultSelected, items }: ISelect) => {
+const Select = ({ placeholder, defaultSelected, items, onChange }: ISelect) => {
   const [showOptions, setShowOptions] = useState(false);
   const [selected, setSelected] = useState(defaultSelected);
   const ref = useRef(null);
@@ -39,6 +39,11 @@ const Select = ({ placeholder, defaultSelected, items }: ISelect) => {
   };
 
   useOnClickOutside(ref, handleClickOutside);
+
+  useEffect(() => {
+    onChange(selected || "");
+  }, [selected]);
+
   return (
     <S.Container ref={ref} onClick={handleContainerClick}>
       {placeholder && !selected ? (

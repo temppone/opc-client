@@ -16,19 +16,16 @@ export const InputContainer = styled.div`
     justify-content: space-between;
     width: 100%;
     max-width: 40rem;
-
-    border-radius: ${theme.border.radius};
-
-    &:focus-within {
-      background-color: transparent;
-    }
+    background-color: ${theme.colors.background.main};
+    padding: ${theme.spacings.xxsmall};
+    border-radius: ${theme.border.radius.small};
   `}
 `;
 
 export const Input = styled.input`
   ${({ theme }) => css`
     width: 100%;
-    font-size: 2rem;
+    font-size: ${theme.font.sizes.xsmall};
     border: none;
     outline: none;
     background: transparent;

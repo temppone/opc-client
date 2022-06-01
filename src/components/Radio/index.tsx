@@ -17,7 +17,13 @@ const Radio = ({ onCheck, label, labelFor, value }: IRadio) => {
 
   return (
     <S.Container>
-      <S.Input id={labelFor} value={value} onChange={onChange} type="radio" />
+      <S.Input
+        id={labelFor}
+        value={value}
+        onChange={onChange}
+        type="radio"
+        name="radio"
+      />
       {!!label && <S.Label htmlFor={labelFor}>{label}</S.Label>}
     </S.Container>
   );

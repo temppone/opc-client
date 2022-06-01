@@ -6,7 +6,11 @@ import Button from "../Button";
 import * as S from "./styles";
 import { setNextQuestion, setPreviousQuestion } from "../../store/ducks/wizard";
 
-const WizardButtons = () => {
+interface IWizardButton {
+  disabled: boolean;
+}
+
+const WizardButtons = ({ disabled }: IWizardButton) => {
   const dispatch = useDispatch();
   const { actualQuestion } = useSelector((store: WizardState) => store.wizard);
 
@@ -20,6 +24,7 @@ const WizardButtons = () => {
 
       <S.NextButton>
         <Button
+          disabled={disabled}
           icon={<ChevronRight />}
           onClick={() => dispatch(setNextQuestion())}
         />

@@ -1,23 +1,22 @@
 import React from "react";
 import WizardButtons from "../WizardButtons";
-import WizardLabel from "../WizardLabel";
 import * as S from "./styles";
 
 interface IWizardQuestion {
   children?: React.ReactNode;
   question: string;
+  disabled: boolean;
 }
 
-const WizardQuestion = ({ children, question }: IWizardQuestion) => {
+const WizardQuestion = ({ children, question, disabled }: IWizardQuestion) => {
   return (
     <S.Container>
-      <S.QuestionContainer>
-        <WizardLabel text={question} />
-      </S.QuestionContainer>
+      <S.QuestionContainer></S.QuestionContainer>
 
       <S.ChildrenContainer>{children}</S.ChildrenContainer>
+
       <S.ButtonsContainer>
-        <WizardButtons />
+        <WizardButtons disabled={disabled} />
       </S.ButtonsContainer>
     </S.Container>
   );

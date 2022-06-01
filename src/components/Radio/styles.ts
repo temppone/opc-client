@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 
-export const Container = styled.label`
+export const Container = styled.div`
   ${({ theme }) => css`
     padding: ${theme.spacings.xsmall};
     display: flex;

@@ -1,26 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import WizardQuestion from "../../components/WizardQuestion";
+import Question from "../../components/Question";
 import { WizardState } from "../../store";
 import Radio from "./../../components/Radio/index";
 import Select from "./../../components/Select/index";
 import { questions } from "./../../data/questions";
 import * as S from "./styles";
+import CalendarPicker from "./../../components/DatePicker/index";
 
 const Wizard = () => {
   const { actualQuestion } = useSelector((store: WizardState) => store.wizard);
+  const [disabled, setDisabled] = useState(true);
 
   return (
     <S.Container>
-      <WizardQuestion question={questions[actualQuestion].question}>
+      <Question
+        disabled={disabled}
+        question={questions[actualQuestion].question}
+      >
         {questions[actualQuestion].type === "radio" &&
-          questions[actualQuestion].answers.map((answer) => (
+          questions[actualQuestion].answers?.map((answer) => (
             <Radio
               key={answer.id}
               label={answer.label}
               labelFor={answer.label}
               value={answer.value}
               onCheck={() => {
+                setDisabled(false);
                 console.log(answer.value);
               }}
             />
@@ -30,11 +36,16 @@ const Wizard = () => {
           <Select
             label="Área de atuação"
             placeholder="Selecione sua área de atuação"
-            defaultSelected="Selecione sua área de atuação"
             items={questions[actualQuestion].answers || []}
+            onChange={(value) => {
+              value === "" ? setDisabled(true) : setDisabled(false);
+              console.log(value);
+            }}
           />
         )}
-      </WizardQuestion>
+
+        {questions[actualQuestion].type === "date" && <CalendarPicker />}
+      </Question>
     </S.Container>
   );
 };
