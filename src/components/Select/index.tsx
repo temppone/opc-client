@@ -1,5 +1,5 @@
 import { ChevronDown } from "@styled-icons/fa-solid";
-import React, { ChangeEvent, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import useOnClickOutside from "../../hooks/useOutsideClick";
 import * as S from "./styles";
 
@@ -42,6 +42,8 @@ const Select = ({ placeholder, defaultSelected, items, onChange }: ISelect) => {
 
   useEffect(() => {
     onChange(selected || "");
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selected]);
 
   return (

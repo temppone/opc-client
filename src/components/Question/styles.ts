@@ -34,3 +34,11 @@ export const ChildrenContainer = styled.div`
   flex-direction: column;
   width: 100%;
 `;
+
+export const QuestionButtons = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+`;

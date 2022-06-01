@@ -22,18 +22,23 @@ const Question = ({ disabled, question, children }: IWizardButton) => {
 
       <S.ChildrenContainer>{children}</S.ChildrenContainer>
 
-      {actualQuestion !== 0 && (
-        <Button backgroundLess onClick={() => dispatch(setPreviousQuestion())}>
-          VOLTAR
-        </Button>
-      )}
-      <S.NextButton>
-        <Button
-          disabled={disabled}
-          icon={<ChevronRight />}
-          onClick={() => dispatch(setNextQuestion())}
-        />
-      </S.NextButton>
+      <S.QuestionButtons>
+        {actualQuestion !== 0 && (
+          <Button
+            backgroundLess
+            onClick={() => dispatch(setPreviousQuestion())}
+          >
+            VOLTAR
+          </Button>
+        )}
+        <S.NextButton>
+          <Button
+            disabled={disabled}
+            icon={<ChevronRight />}
+            onClick={() => dispatch(setNextQuestion())}
+          />
+        </S.NextButton>
+      </S.QuestionButtons>
     </S.Container>
   );
 };

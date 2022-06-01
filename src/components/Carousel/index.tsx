@@ -112,7 +112,13 @@ const Carousel = () => {
         </Button>
       </S.StartButton>
 
-      <S.JumpButton>{activeIndex === 2 ? "VOLTAR" : "PULAR"}</S.JumpButton>
+      <S.JumpButton
+        onClick={
+          activeIndex === 2 ? () => updateItem(0) : () => navigate("/wizard")
+        }
+      >
+        {activeIndex === 2 ? "VOLTAR" : "PULAR"}
+      </S.JumpButton>
     </S.Container>
   );
 };
