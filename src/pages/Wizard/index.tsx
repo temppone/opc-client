@@ -11,6 +11,13 @@ import CalendarPicker from "./../../components/DatePicker/index";
 const Wizard = () => {
   const { actualQuestion } = useSelector((store: WizardState) => store.wizard);
   const [disabled, setDisabled] = useState(true);
+  const [finalData, setFinalData] = useState({});
+
+  const handleChangeFinalData = (value: string, name: string) => {
+    setFinalData({ ...finalData, [name]: value });
+    setDisabled(false);
+    console.log(finalData);
+  };
 
   return (
     <S.Container>
@@ -27,7 +34,10 @@ const Wizard = () => {
               value={answer.value}
               onCheck={() => {
                 setDisabled(false);
-                console.log(answer.value);
+                handleChangeFinalData(
+                  answer.value,
+                  questions[actualQuestion].question
+                );
               }}
             />
           ))}
@@ -39,7 +49,6 @@ const Wizard = () => {
             items={questions[actualQuestion].answers || []}
             onChange={(value) => {
               value === "" ? setDisabled(true) : setDisabled(false);
-              console.log(value);
             }}
           />
         )}

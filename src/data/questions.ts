@@ -88,4 +88,10 @@ export const questions = [
     question: "Qual o prazo de finalização do projeto?",
     type: "date",
   },
+
+  {
+    id: 7,
+    question: "Qual a informação importante?",
+    type: "textfield",
+  },
 ];
