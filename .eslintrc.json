@@ -2,6 +2,7 @@
   "env": {
     "browser": true,
     "amd": true,
+    "jest": true,
     "node": true
   },
   "settings": {

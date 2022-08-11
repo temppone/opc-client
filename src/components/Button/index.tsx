@@ -12,6 +12,7 @@ export interface IButton {
   icon?: ReactNode;
   backgroundLess?: boolean;
   disabled?: boolean;
+  name?: string;
 }
 
 const Button = ({
@@ -24,6 +25,7 @@ const Button = ({
   size = "medium",
   disabled,
   backgroundLess,
+  name,
 }: IButton) => {
   return (
     <S.Container
@@ -35,6 +37,7 @@ const Button = ({
       hasIcon={!!icon}
       color={color}
       arrow={arrow}
+      name={name}
     >
       {!!children && <span>{children}</span>}
 
