@@ -1,11 +1,5 @@
 # Gerador de contratos
 
-## Tecnologias
+## Links
 
-Redux - Gerenciamento de estado
-
-Jest - Testes unitários
-
-Cypress - Testes de integração
-
-styled-components - Componentes de estilos
+[Figma](https://www.figma.com/file/siyKHMSLlf7sMBWuuEQfuR/opc)
