@@ -5,7 +5,6 @@ Projeto desenvolvido pela comunidade [He4rt](https://heartdevs.com/)
 ## Conhecimentos para contribuir
 
 - Ecossistema React.js
-- Mobile first
 
 ## Iniciando
 
@@ -36,6 +35,7 @@ Ao contribuir será criado um vínculo com a comunidade open source, na qual tod
 5. Abra um Pull Request
 
 **Extra:** Nós utilizamos o Github para organização de tarefas, ele é público e você pode acessá-lo [aqui](https://github.com/temppone/opc/issues)
+**Extra:** As telas foram feitas com mobile first, então muitas telas estão responsivas no celular no desktop não 
 
 ## Links
 
