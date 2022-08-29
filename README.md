@@ -34,8 +34,8 @@ Ao contribuir será criado um vínculo com a comunidade open source, na qual tod
 4. Faça Push no seu Branch (`git push origin 'feat/loveReact'`)
 5. Abra um Pull Request
 
-**Extra:** Nós utilizamos o Github para organização de tarefas, ele é público e você pode acessá-lo [aqui](https://github.com/temppone/opc/issues)
-**Extra:** As telas foram feitas com mobile first, então muitas telas estão responsivas no celular no desktop não 
+- **Extra:** Nós utilizamos o Github para organização de tarefas, ele é público e você pode acessá-lo [aqui](https://github.com/temppone/opc/issues)
+- **As telas foram feitas com mobile first, então muitas telas estão responsivas no celular no desktop não** 
 
 ## Links
 
