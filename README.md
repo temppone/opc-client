@@ -30,8 +30,8 @@ Ao contribuir será criado um vínculo com a comunidade open source, na qual tod
 
 1. Faça um Fork do projeto
 2. Crie uma branch sempre que houver uma nova feature (`git checkout -b 'feat/loveReact'`)
-3. Faça seu Commit (`git commit -m 'adding some stuff'`)
-4. Faça Push no seu Branch (`git push origin 'feature/loveReact'`)
+3. Faça seu Commit (`git commit -m 'feat: adding some stuff'`)
+4. Faça Push no seu Branch (`git push origin 'feat/loveReact'`)
 5. Abra um Pull Request
 
 **Extra:** Nós utilizamos o Github para organização de tarefas, ele é público e você pode acessá-lo [aqui](https://github.com/temppone/opc/issues)
