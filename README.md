@@ -4,7 +4,7 @@ Projeto desenvolvido pela comunidade [He4rt](https://heartdevs.com/)
 
 ## Conhecimentos para contribuir
 
-- Ecosistema React.js
+- Ecossistema React.js
 
 ## Iniciando
 
