@@ -5,6 +5,7 @@ Projeto desenvolvido pela comunidade [He4rt](https://heartdevs.com/)
 ## Conhecimentos para contribuir
 
 - Ecossistema React.js
+- Mobile first
 
 ## Iniciando
 
