@@ -4,11 +4,10 @@ import * as S from "./styles";
 
 interface IWizardQuestion {
   children?: React.ReactNode;
-  question: string;
   disabled: boolean;
 }
 
-const WizardQuestion = ({ children, question, disabled }: IWizardQuestion) => {
+const WizardQuestion = ({ children, disabled }: IWizardQuestion) => {
   return (
     <S.Container>
       <S.QuestionContainer></S.QuestionContainer>
