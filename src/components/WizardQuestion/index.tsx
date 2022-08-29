@@ -8,7 +8,7 @@ interface IWizardQuestion {
   disabled: boolean;
 }
 
-const WizardQuestion = ({ children, question, disabled }: IWizardQuestion) => {
+const WizardQuestion = ({ children, disabled }: IWizardQuestion) => {
   return (
     <S.Container>
       <S.QuestionContainer></S.QuestionContainer>
