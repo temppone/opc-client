@@ -32,11 +32,11 @@ describe("<Button />", () => {
   it("should render the large button", () => {
     renderWithTheme(
       <Button size="large" name="Hello" onClick={() => console.log("click")}>
-        Hello
+        HelloTest
       </Button>
     );
 
-    expect(screen.getByRole("button", { name: "Hello" })).toHaveStyle({
+    expect(screen.getByRole("button", { name: "HelloTest" })).toHaveStyle({
       "font-size": mainTheme.font.sizes.xxlarge,
     });
   });
