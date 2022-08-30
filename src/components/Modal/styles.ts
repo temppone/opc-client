@@ -16,13 +16,17 @@ export const Overlay = styled.div`
 export const Container = styled.div`
   position: fixed;
   background: white;
-  width: 354px;
+  width: 90%;
   height: 80vh;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 
   border-radius: ${({ theme }) => theme.border.radius.small};
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
+    max-width: 1280px;
+  }
 `;
 
 export const Header = styled.div`
@@ -39,6 +43,10 @@ export const Header = styled.div`
   `}
 `;
 
+export const Icon = styled.div`
+  cursor: pointer;
+`;
+
 export const Content = styled.div`
   display: flex;
   flex-direction: column;
@@ -46,4 +54,8 @@ export const Content = styled.div`
   font-size: ${({ theme }) => theme.font.sizes.xxsmall};
   height: 80%;
   overflow-y: auto;
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
+    height: 90%;
+  }
 `;

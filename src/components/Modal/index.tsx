@@ -24,7 +24,9 @@ const Modal = ({ children, title, isOpen, onClose }: IModal) => {
       <S.Container ref={ref}>
         <S.Header>
           {title}
-          <Close onClick={onClose} size={25} />
+          <S.Icon>
+            <Close onClick={onClose} size={25} />
+          </S.Icon>
         </S.Header>
         <S.Content>{children}</S.Content>
       </S.Container>
