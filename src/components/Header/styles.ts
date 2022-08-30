@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 import { IHeader } from "./index";
 
-export const Container = styled.div<IHeader>`
+export const Content = styled.header<IHeader>`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -24,14 +24,23 @@ export const Container = styled.div<IHeader>`
   }
 `;
 
+export const Container = styled.div`
+  width: 100%;
+`;
+
 export const Icon = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
   align-items: center;
-  width: 100%;
+  width: 10%;
+  cursor: pointer;
 
   svg {
     width: 100%;
+  }
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
+    width: 5%;
   }
 `;

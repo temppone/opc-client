@@ -1,12 +1,11 @@
 import { ChevronRight } from "@styled-icons/fa-solid";
-import React, { useEffect } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import primary from "../../assets/Carousel/1.svg";
 import secondary from "../../assets/Carousel/2.svg";
 import third from "../../assets/Carousel/3.svg";
 import Button from "../../components/Button";
 import Card from "../../components/Card";
-import { useQuestions } from "../../services/hooks/useQuestions";
 import Carousel from "./../../components/Carousel/index";
 import * as S from "./styles";
 
