@@ -1,4 +1,4 @@
-import { ChevronRight } from "@styled-icons/fa-solid";
+import { ChevronRight, Search } from "@styled-icons/fa-solid";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import primary from "../../assets/Carousel/1.svg";
@@ -6,6 +6,7 @@ import secondary from "../../assets/Carousel/2.svg";
 import third from "../../assets/Carousel/3.svg";
 import Button from "../../components/Button";
 import Card from "../../components/Card";
+import Input from "../../components/Input";
 import Carousel from "./../../components/Carousel/index";
 import * as S from "./styles";
 
@@ -41,6 +42,8 @@ const Home = () => {
       <S.CarouselContainer>
         <Carousel />
       </S.CarouselContainer>
+
+      <Input buttonChild={<Search color="white" size={12} />} />
 
       <S.CardsContainer>
         {items.map((item, index) => (
