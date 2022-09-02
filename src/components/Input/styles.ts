@@ -60,9 +60,14 @@ export const Icon = styled.div`
 export const Button = styled.button`
   background-color: ${({ theme }) => theme.colors.primary.main};
   border-style: none;
+  cursor: pointer;
 
   ${({ theme }) => css`
     padding: ${theme.spacings.xxsmall};
     border-radius: 0 ${theme.border.radius.small} ${theme.border.radius.small} 0;
   `}
+
+  &:active {
+    background-color: ${({ theme }) => theme.colors.primary.dark};
+  }
 `;
