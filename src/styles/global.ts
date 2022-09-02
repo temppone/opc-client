@@ -13,6 +13,5 @@ export const GlobalStyles = createGlobalStyle`
   html {
     font-size: 62.5%;
     font-family: ${({ theme }) => theme.font.family};
-    background-color: ${({ theme }) => theme.colors.primary.main}; 
   }
 `;

@@ -1,5 +1,4 @@
 import { ChevronRight } from "@styled-icons/fa-solid";
-import React from "react";
 import { useNavigate } from "react-router-dom";
 import primary from "../../assets/Carousel/1.svg";
 import secondary from "../../assets/Carousel/2.svg";

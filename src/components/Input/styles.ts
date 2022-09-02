@@ -1,4 +1,5 @@
 import styled, { css } from "styled-components";
+import { IInput } from ".";
 
 export const Container = styled.div`
   display: flex;
@@ -9,8 +10,8 @@ export const Container = styled.div`
   max-width: 50rem;
 `;
 
-export const InputContainer = styled.div`
-  ${({ theme }) => css`
+export const InputContainer = styled.div<Pick<IInput, "buttonChild">>`
+  ${({ theme, buttonChild }) => css`
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -18,11 +19,13 @@ export const InputContainer = styled.div`
     max-width: 40rem;
     background-color: ${theme.colors.background.main};
     padding: ${theme.spacings.xxsmall};
-    border-radius: ${theme.border.radius.small};
+    border-radius: ${buttonChild
+      ? `${theme.border.radius.small} 0 0 ${theme.border.radius.small}`
+      : theme.border.radius.small};
   `}
 `;
 
-export const Input = styled.input`
+export const Input = styled.input<Pick<IInput, "buttonChild">>`
   ${({ theme }) => css`
     width: 100%;
     font-size: ${theme.font.sizes.xsmall};
@@ -30,7 +33,6 @@ export const Input = styled.input`
     outline: none;
     background: transparent;
     color: ${theme.colors.typography.main};
-    border-radius: ${theme.border.radius};
 
     ::placeholder {
       color: ${theme.colors.typography.darker};
@@ -53,4 +55,19 @@ export const Icon = styled.div`
       width: 100%;
     }
   `}
+`;
+
+export const Button = styled.button`
+  background-color: ${({ theme }) => theme.colors.primary.main};
+  border-style: none;
+  cursor: pointer;
+
+  ${({ theme }) => css`
+    padding: ${theme.spacings.xxsmall};
+    border-radius: 0 ${theme.border.radius.small} ${theme.border.radius.small} 0;
+  `}
+
+  &:active {
+    background-color: ${({ theme }) => theme.colors.primary.dark};
+  }
 `;

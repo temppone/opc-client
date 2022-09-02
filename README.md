@@ -29,7 +29,7 @@ git clone https://github.com/temppone/opc/
 Ao contribuir será criado um vínculo com a comunidade open source, na qual todos, incluindo você, utilizam todos os dias para aprender e criar seus projetos.
 
 1. Faça um Fork do projeto
-2. Crie uma branch sempre que houver uma nova feature (`git checkout -b 'feat/loveReact'`)
+2. Selecione uma issue e coloque seu nome nela. Crie uma branch sempre que houver uma nova feature ou fix (`git checkout -b 'feat/loveReact'`)
 3. Faça seu Commit (`git commit -m 'feat: adding some stuff'`)
 4. Faça Push no seu Branch (`git push origin 'feat/loveReact'`)
 5. Abra um Pull Request
