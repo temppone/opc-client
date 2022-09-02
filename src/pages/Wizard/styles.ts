@@ -10,7 +10,7 @@ export const Container = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
-    width: 1280px;
+    max-width: 1280px;
     margin: 0 auto;
     padding-top: 8rem;
     gap: 12rem;

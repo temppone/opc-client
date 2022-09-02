@@ -16,7 +16,6 @@ const Wizard = () => {
   const handleChangeFinalData = (value: string, name: string) => {
     setFinalData({ ...finalData, [name]: value });
     setDisabled(false);
-    console.log(finalData);
   };
 
   return (

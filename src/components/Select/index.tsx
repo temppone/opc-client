@@ -1,6 +1,6 @@
 import { ChevronDown } from "@styled-icons/fa-solid";
 import React, { useEffect, useRef, useState } from "react";
-import useOnClickOutside from "../../hooks/useOutsideClick";
+import { useOnClickOutside } from "../../hooks/useOutsideClick";
 import * as S from "./styles";
 
 export interface Item {

@@ -53,7 +53,9 @@ export const mainTheme: DefaultTheme = {
       main: "#F3F3F3",
       dark: "#D1D3D4",
     },
+
     white: "#FFFFFE",
+    gray: "#E3E7E9",
   },
 
   spacings: {
