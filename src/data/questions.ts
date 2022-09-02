@@ -90,8 +90,8 @@ export const questions = [
   },
 
   {
-    id: 7,
-    question: "Qual a informação importante?",
-    type: "textfield",
+    id: 9,
+    question: "Dados do cliente:",
+    type: "clientData",
   },
 ];

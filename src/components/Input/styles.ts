@@ -5,20 +5,23 @@ export const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 2rem;
+  padding: 0.5rem;
   width: 100%;
   max-width: 50rem;
 `;
 
 export const InputContainer = styled.div<Pick<IInput, "buttonChild">>`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 40rem;
+  height: 51px;
+
   ${({ theme, buttonChild }) => css`
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    max-width: 40rem;
     background-color: ${theme.colors.background.main};
-    padding: ${theme.spacings.xxsmall};
+    padding: ${theme.spacings.xxsmall} ${theme.spacings.xsmall};
+
     border-radius: ${buttonChild
       ? `${theme.border.radius.small} 0 0 ${theme.border.radius.small}`
       : theme.border.radius.small};
@@ -35,6 +38,7 @@ export const Input = styled.input<Pick<IInput, "buttonChild">>`
     color: ${theme.colors.typography.main};
 
     ::placeholder {
+      font-size: ${({ theme }) => theme.font.sizes.xxsmall};
       color: ${theme.colors.typography.darker};
     }
   `}
@@ -61,6 +65,8 @@ export const Button = styled.button`
   background-color: ${({ theme }) => theme.colors.primary.main};
   border-style: none;
   cursor: pointer;
+  color: ${({ theme }) => theme.colors.white};
+  height: 51px;
 
   ${({ theme }) => css`
     padding: ${theme.spacings.xxsmall};

@@ -1,12 +1,13 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useSelector } from "react-redux";
+import DataForm from "../../components/DataForm";
 import Question from "../../components/Question";
 import { WizardState } from "../../store";
+import CalendarPicker from "./../../components/DatePicker/index";
 import Radio from "./../../components/Radio/index";
 import Select from "./../../components/Select/index";
 import { questions } from "./../../data/questions";
 import * as S from "./styles";
-import CalendarPicker from "./../../components/DatePicker/index";
 
 const Wizard = () => {
   const { actualQuestion } = useSelector((store: WizardState) => store.wizard);
@@ -53,6 +54,8 @@ const Wizard = () => {
         )}
 
         {questions[actualQuestion].type === "date" && <CalendarPicker />}
+
+        {questions[actualQuestion].type === "clientData" && <DataForm />}
       </Question>
     </S.Container>
   );

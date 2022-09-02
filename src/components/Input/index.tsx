@@ -31,10 +31,12 @@ const Input = ({
   return (
     <S.Container>
       {!!label && <S.Label htmlFor={labelFor}>{label}</S.Label>}
+
       <S.InputContainer buttonChild={buttonChild}>
         <S.Input type="text" onChange={onChange} value={value} {...props} />
         {!!icon && <S.Icon>{icon}</S.Icon>}
       </S.InputContainer>
+
       {!!buttonChild && (
         <S.Button onClick={onClickButton}>{buttonChild}</S.Button>
       )}
