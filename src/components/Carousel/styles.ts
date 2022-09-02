@@ -86,7 +86,7 @@ export const Indicators = styled.div`
   justify-content: center;
   gap: ${({ theme }) => theme.spacings.small};
   width: 100%;
-  padding: ${({ theme }) => theme.spacings.large};
+  padding: ${({ theme }) => theme.spacings.medium};
 `;
 
 export const Bar = styled.div<IBar>`
@@ -112,7 +112,6 @@ export const StartButton = styled.div<IStartButton>`
   ${({ items, activeIndex }) => css`
     display: ${items.length - 1 === activeIndex ? "flex" : "none"};
     justify-content: center;
-    gap: ${({ theme }) => theme.spacings.small};
     width: 100%;
     padding: ${({ theme }) => theme.spacings.medium};
   `}
