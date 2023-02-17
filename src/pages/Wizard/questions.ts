@@ -1,8 +1,7 @@
 export const questions = [
   {
     id: 3,
-    question:
-      "Alguma pergunta mirabolante e show de bola aqui mais palavras pra ficar top?",
+    question: "Para começar, me diz, qual sua área de atuação?",
     type: "select",
     answers: [
       {

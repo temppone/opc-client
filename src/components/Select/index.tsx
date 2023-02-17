@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { ChevronDown } from "@styled-icons/fa-solid";
 import React, { useEffect, useRef, useState } from "react";
 import { useOnClickOutside } from "../../hooks/useOutsideClick";
@@ -16,7 +17,8 @@ export interface ISelect {
   items: Item[];
   multiple?: boolean;
   showOptions?: boolean;
-  onChange: (value: string) => void;
+  onChange: any;
+  value: Item;
 }
 
 const Select = ({ placeholder, defaultSelected, items, onChange }: ISelect) => {

@@ -1,5 +1,5 @@
 import { AnyAction } from "redux";
-import { questions } from "../../data/questions";
+import { questions } from "../../pages/Wizard/questions";
 
 interface IWizard {
   actualQuestion: number;
