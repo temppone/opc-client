@@ -1,20 +1,25 @@
 import { ChevronRight } from "@styled-icons/fa-solid";
-import React, { ReactNode } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { WizardState } from "../../store";
+import { ReactNode, useContext } from "react";
+import { WizardContext } from "../../contexts/WizardContext";
 import Button from "../Button";
 import * as S from "./styles";
-import { setNextQuestion, setPreviousQuestion } from "../../store/ducks/wizard";
 
 interface IWizardButton {
-  disabled: boolean;
+  disabled?: boolean;
   question: string;
   children?: ReactNode;
+  submit: () => void;
+  questionsLength: number;
 }
 
-const Question = ({ disabled, question, children }: IWizardButton) => {
-  const dispatch = useDispatch();
-  const { actualQuestion } = useSelector((store: WizardState) => store.wizard);
+const Question = ({
+  disabled,
+  question,
+  children,
+  submit,
+  questionsLength,
+}: IWizardButton) => {
+  const { currentStep, nextStep, previousStep } = useContext(WizardContext);
 
   return (
     <S.Container>
@@ -23,19 +28,18 @@ const Question = ({ disabled, question, children }: IWizardButton) => {
       <S.ChildrenContainer>{children}</S.ChildrenContainer>
 
       <S.QuestionButtons>
-        {actualQuestion !== 0 && (
-          <Button
-            backgroundLess
-            onClick={() => dispatch(setPreviousQuestion())}
-          >
+        {currentStep !== 0 && (
+          <Button backgroundLess onClick={() => previousStep()}>
             VOLTAR
           </Button>
         )}
+
         <S.NextButton>
           <Button
+            onSubmit={currentStep === questionsLength - 1 ? submit : undefined}
             disabled={disabled}
             icon={<ChevronRight />}
-            onClick={() => dispatch(setNextQuestion())}
+            onClick={() => nextStep()}
           />
         </S.NextButton>
       </S.QuestionButtons>

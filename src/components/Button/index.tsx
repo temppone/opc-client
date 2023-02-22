@@ -1,8 +1,8 @@
 import { ChevronRight } from "@styled-icons/fa-solid";
-import React, { ReactNode } from "react";
+import React, { ReactNode, HTMLAttributes } from "react";
 import * as S from "./styles";
 
-export interface IButton {
+export interface IButton extends HTMLAttributes<HTMLButtonElement> {
   children?: ReactNode;
   size?: "small" | "medium" | "large";
   color?: "yellow" | "darkYellow";

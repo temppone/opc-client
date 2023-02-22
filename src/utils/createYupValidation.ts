@@ -46,7 +46,6 @@ export const formData: ConfigSchema[] = [
     type: "text",
     validationType: "stringYup",
     value: "User name",
-    required: false,
     validations: [
       {
         type: "required",
@@ -69,7 +68,6 @@ export const formData: ConfigSchema[] = [
     type: "text",
     validationType: "stringYup",
     value: "email",
-    required: true,
     validations: [
       {
         type: "required",
@@ -96,7 +94,6 @@ export const formData: ConfigSchema[] = [
     validationType: "numberYup",
     value: "7878787878",
     placeholder: "Teste",
-    required: true,
     validations: [
       {
         type: "min",
@@ -118,7 +115,6 @@ export const formData: ConfigSchema[] = [
     placeholder: "family members count",
     type: "text",
     validationType: "numberYup",
-    required: false,
     value: "1",
     validations: [
       {
@@ -137,30 +133,52 @@ export const formData: ConfigSchema[] = [
   },
 ];
 
-export const createYupSchema = (schema: any, config: ConfigSchema[]) => {
-  const [{ id, validationType, validations }] = config;
+// export const createYupSchema = (schema: any, config: ConfigSchema[]) => {
+//   const [{ id, validationType, validations }] = config;
 
-  if (!yupValidationsType[validationType]) {
-    return schema;
+//   if (!yupValidationsType[validationType]) {
+//     return schema;
+//   }
+
+//   let yupValidator = yupValidationsType[validationType];
+
+//   validations.forEach((validation) => {
+//     const { params, type } = validation;
+
+//     if (!yupValidator[type]) {
+//       return;
+//     }
+
+//     yupValidator = yupValidator[type](...params);
+//   });
+
+//   schema[id] = yupValidator;
+
+//   return schema;
+// };
+
+// eslint-disable-next-line @typescript-eslint/ban-types
+const schema: yup.ObjectSchema<{}> = yup.object().shape({});
+
+formData.forEach((field: ConfigSchema) => {
+  const { id, required, validations, validationType } = field;
+
+  let fieldSchema = yupValidationsType[validationType];
+
+  if (required) {
+    fieldSchema = fieldSchema.required(validations[0].params[0]);
   }
 
-  let yupValidator = yupValidationsType[validationType];
-
+  //itera os tipos de validação e adiciona os params
   validations.forEach((validation) => {
-    const { params, type } = validation;
+    const { type, params } = validation;
 
-    if (!yupValidator[type]) {
-      return;
-    }
-
-    console.log(type, params);
-
-    yupValidator = yupValidator[type](...params);
+    fieldSchema = fieldSchema[type](...params);
   });
 
-  schema[id] = yupValidator;
+  schema.shape({
+    [id]: fieldSchema,
+  });
+});
 
-  console.log({ schema });
-
-  return schema;
-};
+export const validationSchema = schema;

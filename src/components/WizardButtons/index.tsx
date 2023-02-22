@@ -1,23 +1,20 @@
 import { ChevronRight } from "@styled-icons/fa-solid";
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { WizardState } from "../../store";
+import { useContext } from "react";
+import { WizardContext } from "../../contexts/WizardContext";
 import Button from "../Button";
 import * as S from "./styles";
-import { setNextQuestion, setPreviousQuestion } from "../../store/ducks/wizard";
 
 interface IWizardButton {
   disabled: boolean;
 }
 
 const WizardButtons = ({ disabled }: IWizardButton) => {
-  const dispatch = useDispatch();
-  const { actualQuestion } = useSelector((store: WizardState) => store.wizard);
+  const { currentStep, nextStep, previousStep } = useContext(WizardContext);
 
   return (
     <S.Container>
-      {actualQuestion !== 0 && (
-        <Button backgroundLess onClick={() => dispatch(setPreviousQuestion())}>
+      {currentStep !== 0 && (
+        <Button backgroundLess onClick={() => previousStep()}>
           VOLTAR
         </Button>
       )}
@@ -26,7 +23,7 @@ const WizardButtons = ({ disabled }: IWizardButton) => {
         <Button
           disabled={disabled}
           icon={<ChevronRight />}
-          onClick={() => dispatch(setNextQuestion())}
+          onClick={() => nextStep()}
         />
       </S.NextButton>
     </S.Container>
