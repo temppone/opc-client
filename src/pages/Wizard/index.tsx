@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import br from "date-fns/locale/pt-BR";
 import { useContext, useEffect, useState } from "react";
 import Input from "../../components/Input";
@@ -8,8 +9,7 @@ import Select from "./../../components/Select/index";
 import { questions } from "./../../data/questions";
 import * as S from "./styles";
 
-import { CalendarAlt } from "@styled-icons/fa-solid";
-import DatePicker, { registerLocale } from "react-datepicker";
+import { registerLocale } from "react-datepicker";
 import CalendarPicker from "../../components/DatePicker";
 
 registerLocale("br", br);
