@@ -11,6 +11,7 @@ import * as S from "./styles";
 
 import { registerLocale } from "react-datepicker";
 import CalendarPicker from "../../components/DatePicker";
+import PersonalData from "../../components/PersonalData";
 
 registerLocale("br", br);
 
@@ -40,6 +41,16 @@ const Wizard = () => {
             disabled={disabled}
             question={currentQuestion.question}
           >
+            <PersonalData
+              title="Seus dados:"
+              fullNameLabel="Seu nome completo"
+            />
+
+            <PersonalData
+              title="Dados do cliente:"
+              fullNameLabel="Nome completo do cliente"
+            />
+
             {currentQuestion.type === "radio" &&
               currentQuestion.answers?.map((answer) => (
                 <Radio
