@@ -8,16 +8,17 @@ import { mainTheme } from "./../../styles/theme";
 import * as S from "./styles";
 registerLocale("br", br);
 
-const CalendarPicker = () => {
-  const [startDate, setStartDate] = useState(new Date());
+interface ICalendarPicker {
+  onChange: any;
+}
 
+const CalendarPicker = ({ onChange }: ICalendarPicker) => {
   return (
     <S.Container>
       <DatePicker
         wrapperClassName="date-picker"
         calendarContainer={S.Calendar}
-        selected={startDate}
-        onChange={(date: Date) => setStartDate(date)}
+        onChange={onChange}
         locale="br"
         customInput={
           <Input icon={<CalendarAlt color={mainTheme.colors.primary.main} />} />
