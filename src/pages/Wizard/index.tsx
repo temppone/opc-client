@@ -6,12 +6,11 @@ import Question from "../../components/Question";
 import { WizardContext } from "../../context/WizardContex";
 import Radio from "./../../components/Radio/index";
 import Select from "./../../components/Select/index";
-import { questions } from "./../../data/questions";
 import * as S from "./styles";
 
 import { registerLocale } from "react-datepicker";
 import CalendarPicker from "../../components/DatePicker";
-import PersonalData from "../../components/PersonalData";
+import { useContractTypes } from "../../services/hooks/useContractTypes";
 
 registerLocale("br", br);
 
@@ -21,12 +20,18 @@ const Wizard = () => {
 
   const { currentStep } = useContext(WizardContext);
 
+  const {
+    data: contractTypes,
+    isLoading: contractsTypeIsLoading,
+    error: contractsTypeError,
+  } = useContractTypes();
+
   const handleChangeFinalData = (value: string, name: string) => {
     setFinalData({ ...finalData, [name]: value });
     setDisabled(false);
   };
 
-  const currentQuestion = questions[currentStep];
+  const currentQuestion = contractTypes[currentStep];
 
   useEffect(() => {
     console.log({ finalData });
@@ -41,16 +46,6 @@ const Wizard = () => {
             disabled={disabled}
             question={currentQuestion.question}
           >
-            <PersonalData
-              title="Seus dados:"
-              fullNameLabel="Seu nome completo"
-            />
-
-            <PersonalData
-              title="Dados do cliente:"
-              fullNameLabel="Nome completo do cliente"
-            />
-
             {currentQuestion.type === "radio" &&
               currentQuestion.answers?.map((answer) => (
                 <Radio
