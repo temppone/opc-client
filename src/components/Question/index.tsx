@@ -6,11 +6,19 @@ import * as S from "./styles";
 
 interface IWizardButton {
   disabled: boolean;
-  question: string;
+  question?: string;
   children?: ReactNode;
+  onNextQuestion?: () => void;
+  stepButtons?: boolean;
 }
 
-const Question = ({ disabled, question, children }: IWizardButton) => {
+const Question = ({
+  disabled,
+  question,
+  children,
+  onNextQuestion,
+  stepButtons = true,
+}: IWizardButton) => {
   const { currentStep, previousStep, nextStep } = useContext(WizardContext);
 
   return (
@@ -19,20 +27,26 @@ const Question = ({ disabled, question, children }: IWizardButton) => {
 
       <S.ChildrenContainer>{children}</S.ChildrenContainer>
 
-      <S.QuestionButtons>
-        {currentStep !== 0 && (
-          <Button backgroundLess onClick={() => previousStep()}>
-            VOLTAR
-          </Button>
-        )}
-        <S.NextButton>
-          <Button
-            disabled={disabled}
-            icon={<ChevronRight />}
-            onClick={() => nextStep()}
-          />
-        </S.NextButton>
-      </S.QuestionButtons>
+      {stepButtons ? (
+        <S.QuestionButtons>
+          {currentStep !== 0 && (
+            <Button backgroundLess onClick={() => previousStep()}>
+              VOLTAR
+            </Button>
+          )}
+
+          <S.NextButton>
+            <Button
+              disabled={disabled}
+              icon={<ChevronRight />}
+              onClick={() => {
+                onNextQuestion?.();
+                nextStep();
+              }}
+            />
+          </S.NextButton>
+        </S.QuestionButtons>
+      ) : null}
     </S.Container>
   );
 };

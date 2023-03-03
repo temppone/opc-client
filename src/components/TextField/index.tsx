@@ -11,7 +11,7 @@ export type IInput = {
   onClickButton?: () => void;
 } & React.InputHTMLAttributes<HTMLInputElement>;
 
-const Input = ({
+const TextField = ({
   label,
   labelFor,
   initialValue,
@@ -42,4 +42,4 @@ const Input = ({
   );
 };
 
-export default Input;
+export default TextField;

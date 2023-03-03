@@ -1,5 +1,5 @@
 import { Toaster } from "react-hot-toast";
-import { QueryClient } from "react-query";
+import { QueryClient, QueryClientProvider } from "react-query";
 import { ThemeProvider } from "styled-components";
 import { AppRoutes } from "./routes/index";
 import { GlobalStyles } from "./styles/global";
@@ -20,12 +20,14 @@ export const queryClient = new QueryClient({
 function App() {
   return (
     <div className="App">
-      <ThemeProvider theme={mainTheme}>
-        <GlobalStyles />
-        <Toaster />
+      <QueryClientProvider client={queryClient}>
+        <ThemeProvider theme={mainTheme}>
+          <GlobalStyles />
+          <Toaster />
 
-        <AppRoutes />
-      </ThemeProvider>
+          <AppRoutes />
+        </ThemeProvider>
+      </QueryClientProvider>
     </div>
   );
 }

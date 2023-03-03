@@ -3,7 +3,7 @@ import br from "date-fns/locale/pt-BR";
 import React, { useState } from "react";
 import DatePicker, { registerLocale } from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import Input from "../Input";
+import TextField from "../TextField";
 import { mainTheme } from "./../../styles/theme";
 import * as S from "./styles";
 registerLocale("br", br);
@@ -21,7 +21,9 @@ const CalendarPicker = ({ onChange }: ICalendarPicker) => {
         onChange={onChange}
         locale="br"
         customInput={
-          <Input icon={<CalendarAlt color={mainTheme.colors.primary.main} />} />
+          <TextField
+            icon={<CalendarAlt color={mainTheme.colors.primary.main} />}
+          />
         }
       />
     </S.Container>

@@ -21,6 +21,10 @@ export const InputContainer = styled.div<Pick<IInput, "buttonChild">>`
     border-radius: ${buttonChild
       ? `${theme.border.radius.small} 0 0 ${theme.border.radius.small}`
       : theme.border.radius.small};
+
+    :focus-within {
+      box-shadow: 0 0 0 2px ${theme.colors.gray};
+    }
   `}
 `;
 

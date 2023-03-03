@@ -1,29 +1,70 @@
-import Input from "../Input";
 import { Search } from "@styled-icons/fa-solid";
-import * as S from "./styles";
+import { useForm } from "react-hook-form";
+import { WizardContext } from "../../context/WizardContex";
 import Button from "../Button";
+import TextField from "../TextField";
+import * as S from "./styles";
+import { useContext } from "react";
+import { ChevronRight } from "@styled-icons/material";
 
 interface IPersonalData {
-  title: string;
   fullNameLabel: string;
 }
 
-const PersonalData = ({ title, fullNameLabel }: IPersonalData) => {
+const PersonalData = ({ fullNameLabel }: IPersonalData) => {
+  const { currentStep, previousStep, nextStep } = useContext(WizardContext);
+  const { handleSubmit } = useForm();
+
   return (
     <S.Container>
       <S.InputGroupContainer>
-        <Input placeholder={fullNameLabel} />
-        <Input placeholder="CPF/CNPJ" />
+        <TextField placeholder={fullNameLabel} />
+        <TextField placeholder="CPF/CNPJ" />
       </S.InputGroupContainer>
 
-      <Input
-        placeholder="CEP"
-        buttonChild={
-          <Button onClick={() => console.log("search city")}>
-            <Search />
+      <S.InputGroupContainer>
+        <S.CepContainer>
+          <TextField
+            placeholder="00000-000"
+            buttonChild={
+              <S.ButtonTextField>
+                <Search size="2rem" color="white" />
+              </S.ButtonTextField>
+            }
+          />
+        </S.CepContainer>
+
+        <TextField placeholder="Endereço" />
+
+        <S.AddressDataContainer>
+          <S.UfNumberContainer>
+            <TextField placeholder="UF" />
+            <TextField placeholder="N°" />
+          </S.UfNumberContainer>
+
+          <S.CityComplementContainer>
+            <TextField placeholder="Cidade" />
+            <TextField placeholder="Complemento" />
+          </S.CityComplementContainer>
+        </S.AddressDataContainer>
+      </S.InputGroupContainer>
+
+      <S.QuestionButtons>
+        {currentStep !== 0 && (
+          <Button backgroundLess onClick={() => previousStep()}>
+            VOLTAR
           </Button>
-        }
-      />
+        )}
+
+        <S.NextButton>
+          <Button
+            icon={<ChevronRight />}
+            onClick={() => {
+              nextStep();
+            }}
+          />
+        </S.NextButton>
+      </S.QuestionButtons>
     </S.Container>
   );
 };

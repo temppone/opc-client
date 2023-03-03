@@ -1,13 +1,13 @@
 import { useQuery } from "react-query";
-import { api } from "..";
-import { GET_CONTRACTS_TYPES } from "../queryKeys";
+import { api } from "../..";
+import { GET_CONTRACTS_TYPES } from "../../queryKeys";
 
 export interface IResponse {
-  contractsTypes: { type: string }[];
+  contractsTypes: { label: string; id: string; type: string }[];
 }
 
 export const getContractTypes = async (): Promise<IResponse> => {
-  const { data } = await api.get("/contracts/types/");
+  const { data } = await api.get("/contracts/types");
 
   return data;
 };
