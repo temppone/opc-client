@@ -61,16 +61,6 @@ const PersonalData = ({ fullNameLabel, onPasswordValidate }: IPersonalData) => {
   const { data: addressSearchData, isLoading: addressSearchIsLoading } =
     useAddressSearch(cep);
 
-  const handleGetAddress = () => {
-    setCep(watchCep);
-
-    if (addressSearchData) {
-      setValue("address", addressSearchData.logradouro);
-      setValue("state", addressSearchData.uf);
-      setValue("city", addressSearchData.localidade);
-    }
-  };
-
   return (
     <S.Container>
       <S.InputGroupContainer>
@@ -122,7 +112,7 @@ const PersonalData = ({ fullNameLabel, onPasswordValidate }: IPersonalData) => {
                 helperText={errors.cep?.message ?? ""}
                 placeholder="00000-000"
                 buttonChild={
-                  <S.ButtonTextField onClick={handleGetAddress}>
+                  <S.ButtonTextField onClick={() => setCep(watchCep)}>
                     <Search size="2rem" color="white" />
                   </S.ButtonTextField>
                 }
@@ -137,7 +127,7 @@ const PersonalData = ({ fullNameLabel, onPasswordValidate }: IPersonalData) => {
           render={({ field: { onChange, onBlur, value } }) => (
             <TextField
               name="address"
-              value={value}
+              value={value || addressSearchData?.logradouro}
               onChange={onChange}
               onBlur={onBlur}
               isError={!!errors.address}
@@ -155,7 +145,7 @@ const PersonalData = ({ fullNameLabel, onPasswordValidate }: IPersonalData) => {
               render={({ field: { onChange, onBlur, value } }) => (
                 <TextField
                   name="state"
-                  value={value}
+                  value={value || addressSearchData?.uf}
                   onChange={onChange}
                   onBlur={onBlur}
                   isError={!!errors.state}
@@ -189,7 +179,7 @@ const PersonalData = ({ fullNameLabel, onPasswordValidate }: IPersonalData) => {
               render={({ field: { onChange, onBlur, value } }) => (
                 <TextField
                   name="city"
-                  value={value}
+                  value={value || addressSearchData?.localidade}
                   onChange={onChange}
                   onBlur={onBlur}
                   isError={!!errors.city}
