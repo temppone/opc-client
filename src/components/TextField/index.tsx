@@ -9,6 +9,8 @@ export type IInput = {
   icon?: ReactNode;
   buttonChild?: ReactNode | string;
   onClickButton?: () => void;
+  isError?: boolean;
+  helperText?: string;
 } & React.InputHTMLAttributes<HTMLInputElement>;
 
 const TextField = ({
@@ -19,6 +21,8 @@ const TextField = ({
   icon,
   buttonChild,
   onClickButton,
+  isError,
+  helperText,
   ...props
 }: IInput) => {
   const [value, setValue] = useState(initialValue);
@@ -29,16 +33,19 @@ const TextField = ({
   };
 
   return (
-    <S.Container>
-      {!!label && <S.Label htmlFor={labelFor}>{label}</S.Label>}
-      <S.InputContainer buttonChild={buttonChild}>
-        <S.Input type="text" onChange={onChange} value={value} {...props} />
-        {!!icon && <S.Icon>{icon}</S.Icon>}
-      </S.InputContainer>
-      {!!buttonChild && (
-        <S.Button onClick={onClickButton}>{buttonChild}</S.Button>
-      )}
-    </S.Container>
+    <S.Wrapper>
+      <S.Container>
+        {!!label && <S.Label htmlFor={labelFor}>{label}</S.Label>}
+        <S.InputContainer isError={isError} buttonChild={buttonChild}>
+          <S.Input type="text" onChange={onChange} value={value} {...props} />
+          {!!icon && <S.Icon>{icon}</S.Icon>}
+        </S.InputContainer>
+        {!!buttonChild && (
+          <S.Button onClick={onClickButton}>{buttonChild}</S.Button>
+        )}
+      </S.Container>
+      <S.HelperText>{helperText}</S.HelperText>
+    </S.Wrapper>
   );
 };
 

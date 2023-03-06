@@ -47,6 +47,7 @@ declare module "styled-components" {
       background: ColorShade;
       white: string;
       gray: string;
+      error: string;
     };
 
     spacings: {

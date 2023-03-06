@@ -17,7 +17,6 @@ import { useTheme } from "styled-components";
 import { IFinalData } from "../../@types/wizard";
 import { useContractForm } from "../../services/hooks/contracts/useContractForm";
 import { useContractTypes } from "../../services/hooks/contracts/useContractTypes";
-import { reactSelectStyles } from "./styles";
 
 registerLocale("br", br);
 
@@ -118,7 +117,15 @@ const Wizard = () => {
         stepButtons={!stepButtons}
       >
         {currentQuestion?.type === "personalClientData" ? (
-          <PersonalData fullNameLabel="Seu nome completo" />
+          <PersonalData
+            fullNameLabel="Seu nome completo"
+            onPasswordValidate={(data: any) =>
+              setFinalData({
+                ...finalData,
+                personalClientData: data,
+              })
+            }
+          />
         ) : null}
 
         {/* {currentQuestion.type === "select" ? (

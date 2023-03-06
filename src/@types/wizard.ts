@@ -1,5 +1,8 @@
+import { IPersonalDataForm } from "../components/PersonalData";
+
 export interface IFinalData {
   type?: string;
+  personalClientData?: IPersonalDataForm;
 }
 
 export interface IContractFormResponse {

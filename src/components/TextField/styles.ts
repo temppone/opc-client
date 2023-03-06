@@ -1,6 +1,11 @@
 import styled, { css } from "styled-components";
 import { IInput } from ".";
 
+export const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
 export const Container = styled.div`
   display: flex;
   align-items: center;
@@ -9,8 +14,10 @@ export const Container = styled.div`
   max-width: 50rem;
 `;
 
-export const InputContainer = styled.div<Pick<IInput, "buttonChild">>`
-  ${({ theme, buttonChild }) => css`
+export const InputContainer = styled.div<
+  Pick<IInput, "buttonChild" | "isError">
+>`
+  ${({ theme, buttonChild, isError }) => css`
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -18,6 +25,7 @@ export const InputContainer = styled.div<Pick<IInput, "buttonChild">>`
     max-width: 40rem;
     background-color: ${theme.colors.background.main};
     padding: ${theme.spacings.xxsmall};
+    box-shadow: ${isError ? `0 0 0 2px ${theme.colors.error}` : ""};
     border-radius: ${buttonChild
       ? `${theme.border.radius.small} 0 0 ${theme.border.radius.small}`
       : theme.border.radius.small};
@@ -74,4 +82,11 @@ export const Button = styled.button`
   &:active {
     background-color: ${({ theme }) => theme.colors.primary.dark};
   }
+`;
+
+export const HelperText = styled.div`
+  font-size: 12px;
+  color: ${({ theme }) => theme.colors.error};
+  margin-top: 2px;
+  height: 18px;
 `;
