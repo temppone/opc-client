@@ -6,14 +6,14 @@ import { IAddressResponse } from "../../../@types/address";
 import { GET_ADDRESS } from "../../queryKeys";
 
 export const getAddress = async (
-  cep: number | undefined
+  cep: string | undefined
 ): Promise<IAddressResponse> => {
   const { data } = await axios.get(`https://viacep.com.br/ws/${cep}/json`);
 
   return data;
 };
 
-export const useAddressSearch = (cep: number | undefined) => {
+export const useAddressSearch = (cep: string | undefined) => {
   return useQuery<IAddressResponse | null>(
     [GET_ADDRESS, cep],
     () => getAddress(cep),

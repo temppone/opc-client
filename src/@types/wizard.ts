@@ -1,8 +1,10 @@
-import { IPersonalDataForm } from "../components/PersonalData";
+import { IPersonalCustomerForm } from "../components/PersonalCustomerData";
+import { IPersonalProviderForm } from "../components/PersonalProviderData";
 
 export interface IFinalData {
   type?: string;
-  personalClientData?: IPersonalDataForm;
+  personalCustomerData?: IPersonalCustomerForm;
+  personalProviderData?: IPersonalProviderForm;
 }
 
 export interface IContractFormResponse {

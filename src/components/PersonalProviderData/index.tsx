@@ -11,15 +11,15 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { cepMask, cpfCnpjMask } from "../../utils/masks";
 import { useAddressSearch } from "../../services/hooks/address/useAddressSearch";
 
-interface IPersonalData {
+interface IPersonalProviderData {
   fullNameLabel: string;
-  onPasswordValidate: (personalData: IPersonalDataForm) => void;
+  onDataValidate: (personalData: IPersonalProviderForm) => void;
 }
 
-export interface IPersonalDataForm {
+export interface IPersonalProviderForm {
   fullName: string;
-  document: number;
-  cep: number;
+  document: string;
+  cep: string;
   state: string;
   complement: string;
   addressNumber: number;
@@ -27,14 +27,17 @@ export interface IPersonalDataForm {
   address: string;
 }
 
-const PersonalData = ({ fullNameLabel, onPasswordValidate }: IPersonalData) => {
+const PersonalProviderData = ({
+  fullNameLabel,
+  onDataValidate,
+}: IPersonalProviderData) => {
   const { currentStep, previousStep, nextStep } = useContext(WizardContext);
-  const [cep, setCep] = useState<number>();
+  const [cep, setCep] = useState("");
 
   const schema = yup.object({
     fullName: yup.string().required("Obrigatório"),
-    document: yup.number().required("Obrigatório"),
-    cep: yup.number().required("Obrigatório"),
+    document: yup.string().required("Obrigatório"),
+    cep: yup.string().required("Obrigatório"),
     address: yup.string().required("Obrigatório"),
     state: yup.string().required("Obrigatorio"),
     complement: yup.string(),
@@ -48,10 +51,10 @@ const PersonalData = ({ fullNameLabel, onPasswordValidate }: IPersonalData) => {
     watch,
     setValue,
     formState: { errors },
-  } = useForm<IPersonalDataForm>({ resolver: yupResolver(schema) });
+  } = useForm<IPersonalProviderForm>({ resolver: yupResolver(schema) });
 
   const onSubmit = handleSubmit(async (data) => {
-    onPasswordValidate?.(data);
+    onDataValidate?.(data);
 
     nextStep();
   });
@@ -228,4 +231,4 @@ const PersonalData = ({ fullNameLabel, onPasswordValidate }: IPersonalData) => {
   );
 };
 
-export default PersonalData;
+export default PersonalProviderData;
