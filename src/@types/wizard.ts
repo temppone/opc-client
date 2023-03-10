@@ -5,10 +5,11 @@ export interface IFinalData {
   type?: string;
   personalCustomerData?: IPersonalCustomerForm;
   personalProviderData?: IPersonalProviderForm;
+  durationTime?: string;
 }
 
 export interface IContractFormResponse {
-  contractType: ContractType;
+  contractFormType: ContractType;
 }
 
 export interface ContractType {
@@ -20,7 +21,9 @@ export interface ContractType {
 }
 
 export interface Input {
+  id: string;
   required: boolean;
   type: string;
-  questionLabel: string;
+  question_label: string;
+  position: number;
 }

@@ -114,6 +114,7 @@ const PersonalProviderData = ({
                 isError={!!errors.cep}
                 helperText={errors.cep?.message ?? ""}
                 placeholder="00000-000"
+                isLoading={addressSearchIsLoading}
                 buttonChild={
                   <S.ButtonTextField onClick={() => setCep(watchCep)}>
                     <Search size="2rem" color="white" />

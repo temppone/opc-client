@@ -69,14 +69,17 @@ export const Icon = styled.div`
   `}
 `;
 
-export const Button = styled.button`
+export const Button = styled.button<{ disabled?: boolean }>`
   background-color: ${({ theme }) => theme.colors.primary.main};
   border-style: none;
   cursor: pointer;
 
-  ${({ theme }) => css`
+  ${({ theme, disabled }) => css`
     padding: ${theme.spacings.xxsmall};
     border-radius: 0 ${theme.border.radius.small} ${theme.border.radius.small} 0;
+
+    opacity: ${disabled ? "1" : ""};
+    cursor: ${disabled ? "not-allowed" : "pointer"};
   `}
 
   &:active {

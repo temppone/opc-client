@@ -115,6 +115,7 @@ const PersonalCustomerData = ({
                 isError={!!errors.customerCep}
                 helperText={errors.customerCep?.message ?? ""}
                 placeholder="00000-000"
+                disabled={customerAddressSearchIsLoading}
                 buttonChild={
                   <S.ButtonTextField onClick={() => setCep(watchCep)}>
                     <Search size="2rem" color="white" />

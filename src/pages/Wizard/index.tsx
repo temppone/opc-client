@@ -14,6 +14,7 @@ import PersonalProviderData from "../../components/PersonalProviderData";
 import { useContractForm } from "../../services/hooks/contracts/useContractForm";
 import { useContractTypes } from "../../services/hooks/contracts/useContractTypes";
 import { current } from "@reduxjs/toolkit";
+import TextField from "../../components/TextField";
 
 registerLocale("br", br);
 
@@ -42,7 +43,9 @@ const Wizard = () => {
     setDisabled(false);
   };
 
-  const currentQuestion = contractForm?.contractType.inputs[currentStep];
+  const currentQuestion = contractForm?.contractFormType.inputs.find(
+    (input) => currentStep === input.position
+  );
 
   const contractTypesOptions = contractsTypeData?.contractsTypes.map(
     (contractType) => {
@@ -114,9 +117,9 @@ const Wizard = () => {
 
       {currentQuestion?.type === "personalProviderData" ? (
         <Question
-          key={currentQuestion?.questionLabel}
+          key={currentQuestion?.id}
           disabled={currentQuestion?.required || false}
-          question={currentQuestion?.questionLabel}
+          question={currentQuestion?.question_label}
           stepButtons={!stepButtons}
         >
           <PersonalProviderData
@@ -133,9 +136,9 @@ const Wizard = () => {
 
       {currentQuestion?.type === "personalClientData" ? (
         <Question
-          key={currentQuestion?.questionLabel}
+          key={currentQuestion?.id}
           disabled={currentQuestion?.required || false}
-          question={currentQuestion?.questionLabel}
+          question={currentQuestion?.question_label}
           stepButtons={!stepButtons}
         >
           <PersonalCustomerData
@@ -146,6 +149,42 @@ const Wizard = () => {
                 personalCustomerData: data,
               })
             }
+          />
+        </Question>
+      ) : null}
+
+      {currentQuestion?.type !== "personalProviderData" &&
+      currentQuestion?.type !== "personalClientData" &&
+      currentQuestion?.type === "text" ? (
+        <Question
+          key={currentQuestion?.id}
+          disabled={disabled || false}
+          question={currentQuestion?.question_label}
+        >
+          <TextField
+            onChange={(data) => {
+              console.log(data.target.value);
+              setDisabled(!data.target.value);
+              setFinalData({ ...finalData, durationTime: data.target.value });
+            }}
+          />
+        </Question>
+      ) : null}
+
+      {currentQuestion?.type !== "personalProviderData" &&
+      currentQuestion?.type !== "personalClientData" &&
+      currentQuestion?.type === "currency" ? (
+        <Question
+          key={currentQuestion?.id}
+          disabled={disabled || false}
+          question={currentQuestion?.question_label}
+        >
+          <TextField
+            onChange={(data) => {
+              console.log(data.target.value);
+              setDisabled(!data.target.value);
+              setFinalData({ ...finalData, durationTime: data.target.value });
+            }}
           />
         </Question>
       ) : null}

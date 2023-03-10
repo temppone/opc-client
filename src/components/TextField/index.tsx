@@ -11,6 +11,7 @@ export type IInput = {
   onClickButton?: () => void;
   isError?: boolean;
   helperText?: string;
+  isLoading?: boolean;
 } & React.InputHTMLAttributes<HTMLInputElement>;
 
 const TextField = ({
@@ -22,6 +23,7 @@ const TextField = ({
   buttonChild,
   onClickButton,
   isError,
+  isLoading,
   helperText,
   ...props
 }: IInput) => {
@@ -41,7 +43,9 @@ const TextField = ({
           {!!icon && <S.Icon>{icon}</S.Icon>}
         </S.InputContainer>
         {!!buttonChild && (
-          <S.Button onClick={onClickButton}>{buttonChild}</S.Button>
+          <S.Button onClick={onClickButton} disabled={isLoading}>
+            {buttonChild}
+          </S.Button>
         )}
       </S.Container>
       <S.HelperText>{helperText}</S.HelperText>
