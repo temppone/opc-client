@@ -3,7 +3,7 @@ import { ChevronRight, Search } from "@styled-icons/material";
 import { useContext, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import * as yup from "yup";
-import { WizardContext } from "../../context/WizardContex";
+import { WizardContext } from "../../context/WizardContext";
 import { useAddressSearch } from "../../services/hooks/address/useAddressSearch";
 import { cepMask, cpfCnpjMask } from "../../utils/masks";
 import Button from "../Button";

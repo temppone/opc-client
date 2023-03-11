@@ -78,7 +78,7 @@ export const Button = styled.button<{ disabled?: boolean }>`
     padding: ${theme.spacings.xxsmall};
     border-radius: 0 ${theme.border.radius.small} ${theme.border.radius.small} 0;
 
-    opacity: ${disabled ? "1" : ""};
+    opacity: ${disabled ? "0.8" : "1"};
     cursor: ${disabled ? "not-allowed" : "pointer"};
   `}
 

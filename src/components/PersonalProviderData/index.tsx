@@ -1,15 +1,15 @@
-import { Search } from "@styled-icons/fa-solid";
-import { useForm, Controller } from "react-hook-form";
-import { WizardContext } from "../../context/WizardContex";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { Search, Spinner } from "@styled-icons/fa-solid";
+import { ChevronRight } from "@styled-icons/material";
+import { useContext, useState } from "react";
+import { Controller, useForm } from "react-hook-form";
+import * as yup from "yup";
+import { WizardContext } from "../../context/WizardContext";
+import { useAddressSearch } from "../../services/hooks/address/useAddressSearch";
+import { cepMask, cpfCnpjMask } from "../../utils/masks";
 import Button from "../Button";
 import TextField from "../TextField";
 import * as S from "./styles";
-import { useContext, useEffect, useState } from "react";
-import { ChevronRight } from "@styled-icons/material";
-import * as yup from "yup";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { cepMask, cpfCnpjMask } from "../../utils/masks";
-import { useAddressSearch } from "../../services/hooks/address/useAddressSearch";
 
 interface IPersonalProviderData {
   fullNameLabel: string;
@@ -114,7 +114,7 @@ const PersonalProviderData = ({
                 isError={!!errors.cep}
                 helperText={errors.cep?.message ?? ""}
                 placeholder="00000-000"
-                isLoading={addressSearchIsLoading}
+                isLoading={true}
                 buttonChild={
                   <S.ButtonTextField onClick={() => setCep(watchCep)}>
                     <Search size="2rem" color="white" />

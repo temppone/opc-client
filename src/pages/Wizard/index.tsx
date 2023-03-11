@@ -2,7 +2,7 @@
 import br from "date-fns/locale/pt-BR";
 import { useContext, useEffect, useState } from "react";
 import Question from "../../components/Question";
-import { WizardContext } from "../../context/WizardContex";
+import { WizardContext } from "../../context/WizardContext";
 import * as S from "./styles";
 
 import { registerLocale } from "react-datepicker";
@@ -165,7 +165,10 @@ const Wizard = () => {
             onChange={(data) => {
               console.log(data.target.value);
               setDisabled(!data.target.value);
-              setFinalData({ ...finalData, durationTime: data.target.value });
+              setFinalData({
+                ...finalData,
+                [currentQuestion.name]: data.target.value,
+              });
             }}
           />
         </Question>

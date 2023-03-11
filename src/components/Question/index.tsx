@@ -1,6 +1,6 @@
 import { ChevronRight } from "@styled-icons/fa-solid";
 import React, { ReactNode, useContext } from "react";
-import { WizardContext } from "../../context/WizardContex";
+import { WizardContext } from "../../context/WizardContext";
 import Button from "../Button";
 import * as S from "./styles";
 

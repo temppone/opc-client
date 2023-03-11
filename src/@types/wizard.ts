@@ -18,6 +18,7 @@ export interface ContractType {
   type: string;
   inputs: Input[];
   label: string;
+  name: string;
 }
 
 export interface Input {
