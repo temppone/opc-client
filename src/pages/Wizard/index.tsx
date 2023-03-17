@@ -15,6 +15,9 @@ import { useContractForm } from "../../services/hooks/contracts/useContractForm"
 import { useContractTypes } from "../../services/hooks/contracts/useContractTypes";
 import { current } from "@reduxjs/toolkit";
 import TextField from "../../components/TextField";
+import { useGenerateContract } from "../../services/hooks/contracts/useGenerateContract";
+import { toast } from "react-hot-toast";
+import Button from "../../components/Button";
 
 registerLocale("br", br);
 
@@ -57,15 +60,29 @@ const Wizard = () => {
     }
   );
 
+  useEffect(() => {
+    console.log(currentQuestion?.position);
+    console.log({ currentStep });
+
+    console.log(isLastQuestion);
+  }, [currentStep]);
+
+  const isLastQuestion =
+    (!!currentQuestion?.position && currentStep > currentQuestion?.position) ||
+    !currentQuestion;
+
   const stepButtons =
     currentQuestion?.type === "personalClientData" ||
     currentQuestion?.type === "personalProviderData";
 
-  useEffect(() => {
-    console.log({ currentQuestion });
-    console.log({ contractForm });
-  }, [currentQuestion]);
-
+  const generateContract = useGenerateContract({
+    onSuccess: () => {
+      toast.success("Sucesso!");
+    },
+    onError: () => {
+      toast.error("Sucesso!");
+    },
+  });
   //Duvidas com o dudu
   //Ordenação do array do backend de acordo com o necessário, atualmente quando renderizo no frontend ele vem desorganizado
   //Alternativas para a formação do wizard de acordo com o que eu tô fazendo
@@ -186,10 +203,19 @@ const Wizard = () => {
             onChange={(data) => {
               console.log(data.target.value);
               setDisabled(!data.target.value);
-              setFinalData({ ...finalData, durationTime: data.target.value });
+              setFinalData({
+                ...finalData,
+                [currentQuestion.name]: data.target.value,
+              });
             }}
           />
         </Question>
+      ) : null}
+
+      {isLastQuestion && contractType ? (
+        <Button onClick={() => generateContract.mutateAsync(finalData || {})}>
+          Enviar dados
+        </Button>
       ) : null}
     </S.Container>
   );

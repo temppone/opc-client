@@ -5,7 +5,9 @@ export interface IFinalData {
   type?: string;
   personalCustomerData?: IPersonalCustomerForm;
   personalProviderData?: IPersonalProviderForm;
-  durationTime?: string;
+  projectDuration?: string;
+  observation?: string;
+  projectValue?: string;
 }
 
 export interface IContractFormResponse {
@@ -18,7 +20,6 @@ export interface ContractType {
   type: string;
   inputs: Input[];
   label: string;
-  name: string;
 }
 
 export interface Input {
@@ -27,4 +28,5 @@ export interface Input {
   type: string;
   question_label: string;
   position: number;
+  name: string;
 }

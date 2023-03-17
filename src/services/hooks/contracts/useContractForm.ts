@@ -6,7 +6,7 @@ import { GET_CONTRACT_FORM } from "../../queryKeys";
 export const getContractForm = async (
   type: string | undefined
 ): Promise<IContractFormResponse> => {
-  const { data } = await api.get(`/contracts/${type}`);
+  const { data } = await api.get(`/contracts/form/${type}`);
 
   return data;
 };

@@ -17,14 +17,14 @@ interface IPersonalProviderData {
 }
 
 export interface IPersonalProviderForm {
-  fullName: string;
-  document: string;
-  cep: string;
-  state: string;
-  complement: string;
-  addressNumber: number;
-  city: string;
-  address: string;
+  providerFullName: string;
+  providerDocument: string;
+  providerCep: string;
+  providerState: string;
+  providerComplement: string;
+  providerAddressNumber: number;
+  providerCity: string;
+  providerAddress: string;
 }
 
 const PersonalProviderData = ({
@@ -35,14 +35,14 @@ const PersonalProviderData = ({
   const [cep, setCep] = useState("");
 
   const schema = yup.object({
-    fullName: yup.string().required("Obrigatório"),
-    document: yup.string().required("Obrigatório"),
-    cep: yup.string().required("Obrigatório"),
-    address: yup.string().required("Obrigatório"),
-    state: yup.string().required("Obrigatorio"),
-    complement: yup.string(),
-    addressNumber: yup.number().required("Obrigatório"),
-    city: yup.string().required("Obrigatório"),
+    providerFullName: yup.string().required("Obrigatório"),
+    providerDocument: yup.string().required("Obrigatório"),
+    providerCep: yup.string().required("Obrigatório"),
+    providerAddress: yup.string().required("Obrigatório"),
+    providerState: yup.string().required("Obrigatorio"),
+    providerComplement: yup.string(),
+    providerAddressNumber: yup.number().required("Obrigatório"),
+    providerCity: yup.string().required("Obrigatório"),
   });
 
   const {
@@ -59,7 +59,7 @@ const PersonalProviderData = ({
     nextStep();
   });
 
-  const watchCep = watch("cep");
+  const watchCep = watch("providerCep");
 
   const { data: addressSearchData, isLoading: addressSearchIsLoading } =
     useAddressSearch(cep);
@@ -69,15 +69,15 @@ const PersonalProviderData = ({
       <S.InputGroupContainer>
         <Controller
           control={control}
-          name="fullName"
+          name="providerFullName"
           render={({ field: { onChange, onBlur, value } }) => (
             <TextField
-              name="fullName"
+              name="providerFullName"
               value={value}
               onChange={onChange}
               onBlur={onBlur}
-              isError={!!errors.fullName}
-              helperText={errors.fullName?.message ?? ""}
+              isError={!!errors.providerFullName}
+              helperText={errors.providerFullName?.message ?? ""}
               placeholder={fullNameLabel}
             />
           )}
@@ -85,15 +85,15 @@ const PersonalProviderData = ({
 
         <Controller
           control={control}
-          name="document"
+          name="providerDocument"
           render={({ field: { onChange, onBlur, value } }) => (
             <TextField
-              name="document"
+              name="providerDocument"
               value={cpfCnpjMask(value)}
               onChange={onChange}
               onBlur={onBlur}
-              isError={!!errors.document}
-              helperText={errors.document?.message ?? ""}
+              isError={!!errors.providerDocument}
+              helperText={errors.providerDocument?.message ?? ""}
               placeholder="CPF/CNPJ"
             />
           )}
@@ -104,17 +104,17 @@ const PersonalProviderData = ({
         <S.CepContainer>
           <Controller
             control={control}
-            name="cep"
+            name="providerCep"
             render={({ field: { onChange, onBlur, value } }) => (
               <TextField
-                name="document"
+                name="providerCep"
                 value={cepMask(value)}
                 onChange={onChange}
                 onBlur={onBlur}
-                isError={!!errors.cep}
-                helperText={errors.cep?.message ?? ""}
+                isError={!!errors.providerCep}
+                helperText={errors.providerCep?.message ?? ""}
                 placeholder="00000-000"
-                isLoading={true}
+                isLoading={addressSearchIsLoading}
                 buttonChild={
                   <S.ButtonTextField onClick={() => setCep(watchCep)}>
                     <Search size="2rem" color="white" />
@@ -127,15 +127,15 @@ const PersonalProviderData = ({
 
         <Controller
           control={control}
-          name="address"
+          name="providerAddress"
           render={({ field: { onChange, onBlur, value } }) => (
             <TextField
-              name="address"
+              name="providerAddress"
               value={value || addressSearchData?.logradouro}
               onChange={onChange}
               onBlur={onBlur}
-              isError={!!errors.address}
-              helperText={errors.address?.message ?? ""}
+              isError={!!errors.providerAddress}
+              helperText={errors.providerAddress?.message ?? ""}
               placeholder="Endereço"
             />
           )}
@@ -145,15 +145,15 @@ const PersonalProviderData = ({
           <S.UfNumberContainer>
             <Controller
               control={control}
-              name="state"
+              name="providerState"
               render={({ field: { onChange, onBlur, value } }) => (
                 <TextField
-                  name="state"
+                  name="providerState"
                   value={value || addressSearchData?.uf}
                   onChange={onChange}
                   onBlur={onBlur}
-                  isError={!!errors.state}
-                  helperText={errors.state?.message ?? ""}
+                  isError={!!errors.providerState}
+                  helperText={errors.providerState?.message ?? ""}
                   placeholder="UF"
                 />
               )}
@@ -161,15 +161,15 @@ const PersonalProviderData = ({
 
             <Controller
               control={control}
-              name="addressNumber"
+              name="providerAddressNumber"
               render={({ field: { onChange, onBlur, value } }) => (
                 <TextField
-                  name="addressNumber"
+                  name="providerAddressNumber"
                   value={value}
                   onChange={onChange}
                   onBlur={onBlur}
-                  isError={!!errors.addressNumber}
-                  helperText={errors.addressNumber?.message ?? ""}
+                  isError={!!errors.providerAddressNumber}
+                  helperText={errors.providerAddressNumber?.message ?? ""}
                   placeholder="N°"
                 />
               )}
@@ -179,15 +179,15 @@ const PersonalProviderData = ({
           <S.CityComplementContainer>
             <Controller
               control={control}
-              name="city"
+              name="providerCity"
               render={({ field: { onChange, onBlur, value } }) => (
                 <TextField
-                  name="city"
+                  name="providerCity"
                   value={value || addressSearchData?.localidade}
                   onChange={onChange}
                   onBlur={onBlur}
-                  isError={!!errors.city}
-                  helperText={errors.city?.message ?? ""}
+                  isError={!!errors.providerCity}
+                  helperText={errors.providerCity?.message ?? ""}
                   placeholder="Cidade"
                 />
               )}
@@ -195,15 +195,15 @@ const PersonalProviderData = ({
 
             <Controller
               control={control}
-              name="complement"
+              name="providerComplement"
               render={({ field: { onChange, onBlur, value } }) => (
                 <TextField
-                  name="complement"
+                  name="providerComplement"
                   value={value}
                   onChange={onChange}
                   onBlur={onBlur}
-                  isError={!!errors.complement}
-                  helperText={errors.complement?.message ?? ""}
+                  isError={!!errors.providerComplement}
+                  helperText={errors.providerComplement?.message ?? ""}
                   placeholder="Complemento"
                 />
               )}

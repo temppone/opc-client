@@ -7,7 +7,7 @@ export interface IResponse {
 }
 
 export const getContractTypes = async (): Promise<IResponse> => {
-  const { data } = await api.get("/contracts/types");
+  const { data } = await api.get("/contracts/form/types");
 
   return data;
 };
