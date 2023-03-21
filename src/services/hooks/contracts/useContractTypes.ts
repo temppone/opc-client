@@ -3,7 +3,7 @@ import { api } from "../..";
 import { GET_CONTRACTS_TYPES } from "../../queryKeys";
 
 export interface IResponse {
-  contractsTypes: { label: string; id: string; type: string }[];
+  contractsFormsTypes: { label: string; id: string; type: string }[];
 }
 
 export const getContractTypes = async (): Promise<IResponse> => {

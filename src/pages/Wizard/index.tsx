@@ -50,12 +50,12 @@ const Wizard = () => {
     (input) => currentStep === input.position
   );
 
-  const contractTypesOptions = contractsTypeData?.contractsTypes.map(
-    (contractType) => {
+  const contractTypesOptions = contractsTypeData?.contractsFormsTypes.map(
+    (contractsFormsType) => {
       return {
-        id: contractType.id,
-        label: contractType.label,
-        type: contractType.type,
+        id: contractsFormsType.id,
+        label: contractsFormsType.label,
+        type: contractsFormsType.type,
       };
     }
   );
@@ -63,6 +63,7 @@ const Wizard = () => {
   useEffect(() => {
     console.log(currentQuestion?.position);
     console.log({ currentStep });
+    console.log({ contractTypesOptions });
 
     console.log(isLastQuestion);
   }, [currentStep]);

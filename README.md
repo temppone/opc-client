@@ -1,6 +1,6 @@
 # Gerador de contratos
 
-Projeto desenvolvido pela comunidade [He4rt](https://heartdevs.com/)
+Projeto desenvolvido com a comunidade [He4rt](https://heartdevs.com/)
 
 ## Conhecimentos para contribuir
 
@@ -35,8 +35,9 @@ Ao contribuir será criado um vínculo com a comunidade open source, na qual tod
 5. Abra um Pull Request
 
 - **Extra:** Nós utilizamos o Github para organização de tarefas, ele é público e você pode acessá-lo [aqui](https://github.com/temppone/opc/issues)
-- **As telas foram desenvolvidas em mobile first** 
+- **As telas foram desenvolvidas em mobile first**
 
 ## Links
 
 [Figma](https://www.figma.com/file/siyKHMSLlf7sMBWuuEQfuR/opc)
+[API](https://github.com/temppone/opc-api)
