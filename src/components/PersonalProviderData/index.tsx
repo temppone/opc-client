@@ -73,7 +73,7 @@ const PersonalProviderData = ({
           render={({ field: { onChange, onBlur, value } }) => (
             <TextField
               name="providerFullName"
-              value={value}
+              value={value || ""}
               onChange={onChange}
               onBlur={onBlur}
               isError={!!errors.providerFullName}
@@ -89,7 +89,7 @@ const PersonalProviderData = ({
           render={({ field: { onChange, onBlur, value } }) => (
             <TextField
               name="providerDocument"
-              value={cpfCnpjMask(value)}
+              value={cpfCnpjMask(value) || ""}
               onChange={onChange}
               onBlur={onBlur}
               isError={!!errors.providerDocument}
@@ -108,7 +108,7 @@ const PersonalProviderData = ({
             render={({ field: { onChange, onBlur, value } }) => (
               <TextField
                 name="providerCep"
-                value={cepMask(value)}
+                value={cepMask(value) || ""}
                 onChange={onChange}
                 onBlur={onBlur}
                 isError={!!errors.providerCep}
@@ -131,7 +131,7 @@ const PersonalProviderData = ({
           render={({ field: { onChange, onBlur, value } }) => (
             <TextField
               name="providerAddress"
-              value={value || addressSearchData?.logradouro}
+              value={value || addressSearchData?.logradouro || ""}
               onChange={onChange}
               onBlur={onBlur}
               isError={!!errors.providerAddress}
@@ -149,7 +149,7 @@ const PersonalProviderData = ({
               render={({ field: { onChange, onBlur, value } }) => (
                 <TextField
                   name="providerState"
-                  value={value || addressSearchData?.uf}
+                  value={value || addressSearchData?.uf || ""}
                   onChange={onChange}
                   onBlur={onBlur}
                   isError={!!errors.providerState}
@@ -165,7 +165,7 @@ const PersonalProviderData = ({
               render={({ field: { onChange, onBlur, value } }) => (
                 <TextField
                   name="providerAddressNumber"
-                  value={value}
+                  value={value || ""}
                   onChange={onChange}
                   onBlur={onBlur}
                   isError={!!errors.providerAddressNumber}
@@ -183,7 +183,7 @@ const PersonalProviderData = ({
               render={({ field: { onChange, onBlur, value } }) => (
                 <TextField
                   name="providerCity"
-                  value={value || addressSearchData?.localidade}
+                  value={value || addressSearchData?.localidade || ""}
                   onChange={onChange}
                   onBlur={onBlur}
                   isError={!!errors.providerCity}
@@ -199,7 +199,7 @@ const PersonalProviderData = ({
               render={({ field: { onChange, onBlur, value } }) => (
                 <TextField
                   name="providerComplement"
-                  value={value}
+                  value={value || ""}
                   onChange={onChange}
                   onBlur={onBlur}
                   isError={!!errors.providerComplement}

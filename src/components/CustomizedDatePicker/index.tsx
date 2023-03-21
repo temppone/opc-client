@@ -1,18 +1,21 @@
 import { CalendarAlt } from "@styled-icons/fa-regular";
 import br from "date-fns/locale/pt-BR";
-import React, { useState } from "react";
 import DatePicker, { registerLocale } from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { mainTheme } from "../../styles/theme";
 import TextField from "../TextField";
-import { mainTheme } from "./../../styles/theme";
 import * as S from "./styles";
 registerLocale("br", br);
 
 interface ICalendarPicker {
-  onChange: any;
+  onChange: (
+    date: Date | null,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    event: React.SyntheticEvent<any, Event> | undefined
+  ) => void;
 }
 
-const CalendarPicker = ({ onChange }: ICalendarPicker) => {
+const CustomizedDatePicker = ({ onChange }: ICalendarPicker) => {
   return (
     <S.Container>
       <DatePicker
@@ -30,4 +33,4 @@ const CalendarPicker = ({ onChange }: ICalendarPicker) => {
   );
 };
 
-export default CalendarPicker;
+export default CustomizedDatePicker;

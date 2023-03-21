@@ -201,6 +201,7 @@ const Wizard = () => {
           question={currentQuestion?.question_label}
         >
           <TextField
+            onlyNumber
             onChange={(data) => {
               console.log(data.target.value);
               setDisabled(!data.target.value);
