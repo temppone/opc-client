@@ -1,7 +1,8 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Search, Spinner } from "@styled-icons/fa-solid";
 import { ChevronRight } from "@styled-icons/material";
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
 import * as yup from "yup";
 import { WizardContext } from "../../context/WizardContext";
@@ -36,8 +37,17 @@ const PersonalProviderData = ({
 
   const schema = yup.object({
     providerFullName: yup.string().required("Obrigatório"),
-    providerDocument: yup.string().required("Obrigatório"),
-    providerCep: yup.string().required("Obrigatório"),
+    providerDocument: yup
+      .string()
+      .required("Obrigatório")
+      .matches(
+        /^(\d{3}\.\d{3}\.\d{3}-\d{2}|\d{2}\.\d{3}\.\d{3}\/\d{4}-\d{2})$/,
+        "Documento inválido"
+      ),
+    providerCep: yup
+      .string()
+      .required("Obrigatório")
+      .matches(/^(\d{5}-\d{3})$/, "Cep invalido"),
     providerAddress: yup.string().required("Obrigatório"),
     providerState: yup.string().required("Obrigatorio"),
     providerComplement: yup.string(),
@@ -49,6 +59,7 @@ const PersonalProviderData = ({
     handleSubmit,
     control,
     watch,
+    trigger,
     setValue,
     formState: { errors },
   } = useForm<IPersonalProviderForm>({ resolver: yupResolver(schema) });
@@ -63,6 +74,14 @@ const PersonalProviderData = ({
 
   const { data: addressSearchData, isLoading: addressSearchIsLoading } =
     useAddressSearch(cep);
+
+  const handleCep = async () => {
+    const providerCepTrigger = await trigger(["providerCep"]);
+
+    if (providerCepTrigger) {
+      setCep(watchCep);
+    }
+  };
 
   return (
     <S.Container>
@@ -95,6 +114,7 @@ const PersonalProviderData = ({
               isError={!!errors.providerDocument}
               helperText={errors.providerDocument?.message ?? ""}
               placeholder="CPF/CNPJ"
+              maxLength={18}
             />
           )}
         />
@@ -114,9 +134,10 @@ const PersonalProviderData = ({
                 isError={!!errors.providerCep}
                 helperText={errors.providerCep?.message ?? ""}
                 placeholder="00000-000"
+                maxLength={9}
                 isLoading={addressSearchIsLoading}
                 buttonChild={
-                  <S.ButtonTextField onClick={() => setCep(watchCep)}>
+                  <S.ButtonTextField onClick={() => handleCep()}>
                     <Search size="2rem" color="white" />
                   </S.ButtonTextField>
                 }
@@ -221,7 +242,7 @@ const PersonalProviderData = ({
 
         <S.NextButton>
           <Button
-            icon={<ChevronRight />}
+            endIcon={<ChevronRight size={20} />}
             onClick={() => {
               onSubmit();
             }}

@@ -9,7 +9,8 @@ export interface IButton {
   arrow?: boolean;
   onClick: () => void;
   fullWidth?: boolean;
-  icon?: ReactNode;
+  startIcon?: ReactNode;
+  endIcon?: ReactNode;
   backgroundLess?: boolean;
   disabled?: boolean;
   name?: string;
@@ -19,7 +20,8 @@ const Button = ({
   children,
   onClick,
   fullWidth,
-  icon,
+  startIcon,
+  endIcon,
   color = "yellow",
   arrow = false,
   size = "medium",
@@ -34,11 +36,13 @@ const Button = ({
       fullWidth={fullWidth}
       size={size}
       onClick={onClick}
-      hasIcon={!!icon}
+      hasIcon={!!startIcon || !!endIcon}
       color={color}
       arrow={arrow}
       name={name}
     >
+      {startIcon}
+
       {!!children && <span>{children}</span>}
 
       {arrow ? (
@@ -46,7 +50,7 @@ const Button = ({
           <ChevronRight size={25} />
         </S.Icon>
       ) : (
-        icon
+        endIcon
       )}
     </S.Container>
   );

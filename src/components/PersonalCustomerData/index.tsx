@@ -9,6 +9,7 @@ import { cepMask, cpfCnpjMask } from "../../utils/masks";
 import Button from "../Button";
 import TextField from "../TextField";
 import * as S from "./styles";
+import { cnpjRegex, cpfRegex } from "../../utils/regex";
 
 interface IPersonalCustomerData {
   customerFullNameLabel: string;
@@ -35,8 +36,17 @@ const PersonalCustomerData = ({
 
   const schema = yup.object({
     customerFullName: yup.string().required("Obrigatório"),
-    customerDocument: yup.string().required("Obrigatório"),
-    customerCep: yup.string().required("Obrigatório"),
+    customerDocument: yup
+      .string()
+      .required("Obrigatório")
+      .matches(
+        /^(\d{3}\.\d{3}\.\d{3}-\d{2}|\d{2}\.\d{3}\.\d{3}\/\d{4}-\d{2})$/,
+        "Documento inválido"
+      ),
+    customerCep: yup
+      .string()
+      .required("Obrigatório")
+      .matches(/^(\d{5}-\d{3})$/, "Cep invalido"),
     customerAddress: yup.string().required("Obrigatório"),
     customerState: yup.string().required("Obrigatorio"),
     complement: yup.string(),
@@ -48,7 +58,7 @@ const PersonalCustomerData = ({
     handleSubmit,
     control,
     watch,
-    setValue,
+    trigger,
     formState: { errors },
   } = useForm<IPersonalCustomerForm>({ resolver: yupResolver(schema) });
 
@@ -64,6 +74,14 @@ const PersonalCustomerData = ({
     data: customerAddressSearchData,
     isLoading: customerAddressSearchIsLoading,
   } = useAddressSearch(cep);
+
+  const handleCep = async () => {
+    const providerCepTrigger = await trigger(["customerCep"]);
+
+    if (providerCepTrigger) {
+      setCep(watchCep);
+    }
+  };
 
   return (
     <S.Container>
@@ -117,7 +135,7 @@ const PersonalCustomerData = ({
                 placeholder="00000-000"
                 disabled={customerAddressSearchIsLoading}
                 buttonChild={
-                  <S.ButtonTextField onClick={() => setCep(watchCep)}>
+                  <S.ButtonTextField onClick={() => handleCep()}>
                     <Search size="2rem" color="white" />
                   </S.ButtonTextField>
                 }
@@ -222,7 +240,7 @@ const PersonalCustomerData = ({
 
         <S.NextButton>
           <Button
-            icon={<ChevronRight />}
+            endIcon={<ChevronRight size={20} />}
             onClick={() => {
               onSubmit();
             }}

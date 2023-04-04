@@ -29,14 +29,20 @@ export const useGenerateContract = ({ onError, onSuccess }: IRequestStatus) => {
       projectDuration,
       projectValue,
     }: IFinalData) => {
-      const data = api.post("/contracts/generate", {
-        type,
-        personalCustomerData,
-        personalProviderData,
-        observation,
-        projectDuration,
-        projectValue,
-      });
+      const { data } = await api.post(
+        "/contracts/generate",
+        {
+          type,
+          personalCustomerData,
+          personalProviderData,
+          observation,
+          projectDuration,
+          projectValue,
+        },
+        {
+          responseType: "blob",
+        }
+      );
 
       return data;
     },

@@ -10,6 +10,8 @@ interface IWizardButton {
   children?: ReactNode;
   onNextQuestion?: () => void;
   stepButtons?: boolean;
+  lastQuestionFunction?: () => void;
+  isLastQuestion?: boolean;
 }
 
 const Question = ({
@@ -18,6 +20,8 @@ const Question = ({
   children,
   onNextQuestion,
   stepButtons = true,
+  lastQuestionFunction,
+  isLastQuestion,
 }: IWizardButton) => {
   const { currentStep, previousStep, nextStep } = useContext(WizardContext);
 
@@ -36,14 +40,20 @@ const Question = ({
           )}
 
           <S.NextButton>
-            <Button
-              disabled={disabled}
-              icon={<ChevronRight />}
-              onClick={() => {
-                onNextQuestion?.();
-                nextStep();
-              }}
-            />
+            {isLastQuestion ? (
+              <Button arrow onClick={() => lastQuestionFunction?.()}>
+                Concluir
+              </Button>
+            ) : (
+              <Button
+                disabled={disabled}
+                endIcon={<ChevronRight size={20} />}
+                onClick={() => {
+                  onNextQuestion?.();
+                  nextStep();
+                }}
+              />
+            )}
           </S.NextButton>
         </S.QuestionButtons>
       ) : null}
