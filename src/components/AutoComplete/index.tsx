@@ -1,15 +1,15 @@
 import React, { ChangeEvent, useEffect, useState } from "react";
-import Input from "../Input";
+import TextField from "../TextField";
 import * as S from "./styles";
 
 type Option = {
+  id: string;
   label: string;
-  value: string;
 };
 
 type AutoCompleteProps = {
   placeholder?: string;
-  optionsArray: Option[];
+  optionsArray?: Option[];
   isSearch?: boolean;
 };
 
@@ -19,7 +19,7 @@ const AutoComplete = ({
   isSearch = false,
 }: AutoCompleteProps) => {
   const [display, setDisplay] = useState(false);
-  const [options, setOptions] = useState<Option[]>([]);
+  const [options, setOptions] = useState<Option[] | undefined>([]);
   const [search, setSearch] = useState("");
 
   useEffect(() => {
@@ -34,7 +34,7 @@ const AutoComplete = ({
   return (
     <S.Container>
       {isSearch ? (
-        <Input
+        <TextField
           placeholder={placeholder}
           onChange={(event: ChangeEvent<HTMLInputElement>) => {
             setDisplay(true);
@@ -46,7 +46,7 @@ const AutoComplete = ({
         <S.Select onClick={() => setDisplay(true)}>Select</S.Select>
       )}
 
-      {display && (
+      {display && options && (
         <S.List>
           {options
             .filter(

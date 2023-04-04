@@ -1,59 +1,242 @@
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import br from "date-fns/locale/pt-BR";
+import { Fragment, useContext, useState } from "react";
+import { registerLocale } from "react-datepicker";
+import { toast } from "react-hot-toast";
+import ReactSelect from "react-select";
+import { useTheme } from "styled-components";
+import { IFinalData } from "../../@types/wizard";
+import { splashSuccess } from "../../assets/Lotties/splashSuccess";
+import PersonalCustomerData from "../../components/PersonalCustomerData";
+import PersonalProviderData, {
+  IPersonalProviderForm,
+} from "../../components/PersonalProviderData";
 import Question from "../../components/Question";
-import { WizardState } from "../../store";
-import Radio from "./../../components/Radio/index";
-import Select from "./../../components/Select/index";
-import { questions } from "./../../data/questions";
+import TextField from "../../components/TextField";
+import { WizardContext } from "../../context/WizardContext";
+import { useContractForm } from "../../services/hooks/contracts/useContractForm";
+import { useContractTypes } from "../../services/hooks/contracts/useContractTypes";
+import { useGenerateContract } from "../../services/hooks/contracts/useGenerateContract";
 import * as S from "./styles";
-import CalendarPicker from "./../../components/DatePicker/index";
+import Lottie from "react-lottie";
+import Button from "../../components/Button";
+import { Download } from "@styled-icons/material";
+
+registerLocale("br", br);
 
 const Wizard = () => {
-  const { actualQuestion } = useSelector((store: WizardState) => store.wizard);
   const [disabled, setDisabled] = useState(true);
-  const [finalData, setFinalData] = useState({});
+  const [finalData, setFinalData] = useState<IFinalData>();
+  const theme = useTheme();
+  const [contractType, setContractType] = useState<string | undefined>("");
+  const lottieOptions = {
+    animationData: splashSuccess,
+    loop: false,
+  };
 
-  const handleChangeFinalData = (value: string, name: string) => {
-    setFinalData({ ...finalData, [name]: value });
+  const { currentStep } = useContext(WizardContext);
+
+  const { data: contractsTypeData, isLoading: contractsTypeIsLoading } =
+    useContractTypes();
+
+  const { data: contractForm, isLoading: contractFormIsLoading } =
+    useContractForm(contractType);
+
+  const handleChangeFinalData = ({ type }: IFinalData) => {
+    setFinalData({ ...finalData, type });
     setDisabled(false);
   };
 
+  const currentQuestion = contractForm?.contractFormType.inputs.find(
+    (input) => currentStep === input.position
+  );
+
+  const contractTypesOptions = contractsTypeData?.contractsFormsTypes.map(
+    (contractsFormsType) => {
+      return {
+        id: contractsFormsType.id,
+        label: contractsFormsType.label,
+        type: contractsFormsType.type,
+      };
+    }
+  );
+
+  const isLastQuestion =
+    currentQuestion?.position === contractForm?.contractFormType.inputs.length;
+
+  const stepButtons =
+    currentQuestion?.type === "personalClientData" ||
+    currentQuestion?.type === "personalProviderData";
+
+  const generateContract = useGenerateContract({
+    onSuccess: () => {
+      toast.success("Sucesso!");
+    },
+    onError: () => {
+      toast.error("Algo deu errado :(");
+    },
+  });
+
+  const downloadPdf = (data: Blob, fileName: string) => {
+    const href = URL.createObjectURL(data);
+
+    const link = document.createElement("a");
+
+    link.setAttribute("href", href);
+    link.setAttribute("download", `${fileName}.pdf`);
+
+    document.body.appendChild(link);
+
+    link.click();
+
+    document.body.removeChild(link);
+    URL.revokeObjectURL(href);
+  };
+
+  const contractName = `Contrato_${finalData?.personalCustomerData?.customerFullName
+    .split(" ")
+    .slice(0, 1)}_${Intl.DateTimeFormat("pt-BR").format(new Date())}`;
+
   return (
     <S.Container>
-      <Question
-        disabled={disabled}
-        question={questions[actualQuestion].question}
-      >
-        {questions[actualQuestion].type === "radio" &&
-          questions[actualQuestion].answers?.map((answer) => (
-            <Radio
-              key={answer.id}
-              label={answer.label}
-              labelFor={answer.label}
-              value={answer.value}
-              onCheck={() => {
-                setDisabled(false);
-                handleChangeFinalData(
-                  answer.value,
-                  questions[actualQuestion].question
-                );
-              }}
-            />
-          ))}
+      {generateContract.isSuccess ? (
+        <S.SuccessContainer>
+          <Lottie options={lottieOptions} height={400} width={400} />
+          <S.DownloadButton>
+            <Button
+              startIcon={<Download size={25} />}
+              onClick={() => downloadPdf(generateContract.data, contractName)}
+            >
+              <S.ButtonDownloadTypography>DOWNLOAD</S.ButtonDownloadTypography>
+            </Button>
+          </S.DownloadButton>
+        </S.SuccessContainer>
+      ) : (
+        <Fragment>
+          {contractFormIsLoading || contractType ? null : (
+            <Question
+              question="Escolha o tipo de contrato"
+              disabled={disabled}
+              onNextQuestion={() => setContractType(finalData?.type)}
+            >
+              <ReactSelect
+                styles={{
+                  control: (baseStyles, state) => ({
+                    ...baseStyles,
+                    backgroundColor: theme.colors.background.main,
+                    padding: "1rem",
+                    borderColor: state.isFocused
+                      ? theme.colors.gray
+                      : theme.colors.background.main,
 
-        {questions[actualQuestion].type === "select" && (
-          <Select
-            label="Área de atuação"
-            placeholder="Selecione sua área de atuação"
-            items={questions[actualQuestion].answers || []}
-            onChange={(value) => {
-              value === "" ? setDisabled(true) : setDisabled(false);
-            }}
-          />
-        )}
+                    fontSize: theme.font.sizes.xsmall,
+                  }),
+                  option: (baseStyles) => ({
+                    ...baseStyles,
+                    fontSize: theme.font.sizes.xsmall,
+                    backgroundColor: theme.colors.background.main,
+                  }),
 
-        {questions[actualQuestion].type === "date" && <CalendarPicker />}
-      </Question>
+                  group: (baseStyles) => ({
+                    ...baseStyles,
+                    backgroundColor: theme.colors.background.main,
+                  }),
+                }}
+                options={contractTypesOptions}
+                placeholder="Selecione"
+                onChange={(e) => {
+                  setDisabled(!e?.type);
+                  handleChangeFinalData({
+                    type: e?.type,
+                  });
+                }}
+                isLoading={contractsTypeIsLoading}
+              />
+            </Question>
+          )}
+
+          {currentQuestion?.type === "personalProviderData" ? (
+            <Question
+              key={currentQuestion?.id}
+              disabled={currentQuestion?.required || false}
+              question={currentQuestion?.question_label}
+              stepButtons={!stepButtons}
+            >
+              <PersonalProviderData
+                fullNameLabel="Seu nome completo"
+                onDataValidate={(data: IPersonalProviderForm) =>
+                  setFinalData({
+                    ...finalData,
+                    personalProviderData: data,
+                  })
+                }
+              />
+            </Question>
+          ) : null}
+
+          {currentQuestion?.type === "personalClientData" ? (
+            <Question
+              key={currentQuestion?.id}
+              disabled={currentQuestion?.required || false}
+              question={currentQuestion?.question_label}
+              stepButtons={!stepButtons}
+            >
+              <PersonalCustomerData
+                customerFullNameLabel="Nome completo do cliente"
+                onDataValidate={(data: any) =>
+                  setFinalData({
+                    ...finalData,
+                    personalCustomerData: data,
+                  })
+                }
+              />
+            </Question>
+          ) : null}
+
+          {currentQuestion?.type === "text" ? (
+            <Question
+              key={currentQuestion?.id}
+              disabled={disabled || false}
+              question={currentQuestion?.question_label}
+              isLastQuestion={isLastQuestion}
+              lastQuestionFunction={() =>
+                generateContract.mutateAsync(finalData || {})
+              }
+            >
+              <TextField
+                onChange={(data) => {
+                  setDisabled(!data.target.value);
+                  setFinalData({
+                    ...finalData,
+                    [currentQuestion.name]: data.target.value,
+                  });
+                }}
+              />
+            </Question>
+          ) : null}
+
+          {currentQuestion?.type !== "personalProviderData" &&
+          currentQuestion?.type !== "personalClientData" &&
+          currentQuestion?.type === "currency" ? (
+            <Question
+              key={currentQuestion?.id}
+              disabled={disabled || false}
+              question={currentQuestion?.question_label}
+            >
+              <TextField
+                onlyNumber
+                onChange={(data) => {
+                  setDisabled(!data.target.value);
+                  setFinalData({
+                    ...finalData,
+                    [currentQuestion.name]: data.target.value,
+                  });
+                }}
+              />
+            </Question>
+          ) : null}
+        </Fragment>
+      )}
     </S.Container>
   );
 };
