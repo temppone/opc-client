@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useMutation } from "react-query";
 import { api } from "../..";
 import { IFinalData } from "../../../@types/wizard";

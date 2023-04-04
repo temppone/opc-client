@@ -36,17 +36,11 @@ const Wizard = () => {
 
   const { currentStep } = useContext(WizardContext);
 
-  const {
-    data: contractsTypeData,
-    isLoading: contractsTypeIsLoading,
-    error: contractsTypeError,
-  } = useContractTypes();
+  const { data: contractsTypeData, isLoading: contractsTypeIsLoading } =
+    useContractTypes();
 
-  const {
-    data: contractForm,
-    isLoading: contractFormIsLoading,
-    error: contractFormError,
-  } = useContractForm(contractType);
+  const { data: contractForm, isLoading: contractFormIsLoading } =
+    useContractForm(contractType);
 
   const handleChangeFinalData = ({ type }: IFinalData) => {
     setFinalData({ ...finalData, type });

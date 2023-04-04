@@ -9,7 +9,6 @@ import { cepMask, cpfCnpjMask } from "../../utils/masks";
 import Button from "../Button";
 import TextField from "../TextField";
 import * as S from "./styles";
-import { cnpjRegex, cpfRegex } from "../../utils/regex";
 
 interface IPersonalCustomerData {
   customerFullNameLabel: string;

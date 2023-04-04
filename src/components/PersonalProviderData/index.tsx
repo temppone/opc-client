@@ -1,8 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Search, Spinner } from "@styled-icons/fa-solid";
+import { Search } from "@styled-icons/fa-solid";
 import { ChevronRight } from "@styled-icons/material";
-import { useContext, useState, useEffect } from "react";
+import { useContext, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import * as yup from "yup";
 import { WizardContext } from "../../context/WizardContext";
@@ -60,7 +60,6 @@ const PersonalProviderData = ({
     control,
     watch,
     trigger,
-    setValue,
     formState: { errors },
   } = useForm<IPersonalProviderForm>({ resolver: yupResolver(schema) });
 
