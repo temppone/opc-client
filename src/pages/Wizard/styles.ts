@@ -30,10 +30,10 @@ export const SuccessContainer = styled.div`
 `;
 
 export const DownloadButton = styled.div`
-  aling-self: center;
+  align-self: center;
 `;
 
 export const ButtonDownloadTypography = styled.div`
   font-weight: ${({ theme }) => theme.font.weight.large};
-  font-szie: ${({ theme }) => theme.font.sizes.small};
+  font-size: ${({ theme }) => theme.font.sizes.small};
 `;
