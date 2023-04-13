@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import br from "date-fns/locale/pt-BR";
-import { Fragment, useContext, useState } from "react";
+import { Fragment, useContext, useEffect, useState } from "react";
 import { registerLocale } from "react-datepicker";
 import { toast } from "react-hot-toast";
 import ReactSelect from "react-select";
@@ -34,6 +34,10 @@ const Wizard = () => {
     loop: false,
   };
 
+  useEffect(() => {
+    console.log({ finalData });
+  }, [finalData]);
+
   const { currentStep } = useContext(WizardContext);
 
   const { data: contractsTypeData, isLoading: contractsTypeIsLoading } =
@@ -42,8 +46,8 @@ const Wizard = () => {
   const { data: contractForm, isLoading: contractFormIsLoading } =
     useContractForm(contractType);
 
-  const handleChangeFinalData = ({ type }: IFinalData) => {
-    setFinalData({ ...finalData, type });
+  const handleChangeFinalData = ({ type, contractId }: IFinalData) => {
+    setFinalData({ ...finalData, type, contractId });
     setDisabled(false);
   };
 
@@ -146,8 +150,12 @@ const Wizard = () => {
                 placeholder="Selecione"
                 onChange={(e) => {
                   setDisabled(!e?.type);
+
+                  console.log(e?.id);
+                  console.log(e?.type);
                   handleChangeFinalData({
                     type: e?.type,
+                    contractId: e?.id,
                   });
                 }}
                 isLoading={contractsTypeIsLoading}

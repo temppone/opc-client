@@ -29,6 +29,7 @@ export const useGenerateContract = ({ onError, onSuccess }: IRequestStatus) => {
       observation,
       projectDuration,
       projectValue,
+      contractId,
     }: IFinalData) => {
       const { data } = await api.post(
         "/contracts/generate",
@@ -39,6 +40,7 @@ export const useGenerateContract = ({ onError, onSuccess }: IRequestStatus) => {
           observation,
           projectDuration,
           projectValue,
+          contract_id: contractId,
         },
         {
           responseType: "blob",
