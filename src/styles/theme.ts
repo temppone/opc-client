@@ -56,6 +56,7 @@ export const mainTheme: DefaultTheme = {
 
     white: "#FFFFFE",
     gray: "#E3E7E9",
+    error: "#ff4242",
   },
 
   spacings: {

@@ -16,3 +16,24 @@ export const Container = styled.div`
     gap: 12rem;
   }
 `;
+
+export const ReactSelectContainer = styled.div`
+  @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
+    width: 500px;
+  }
+`;
+
+export const SuccessContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+export const DownloadButton = styled.div`
+  align-self: center;
+`;
+
+export const ButtonDownloadTypography = styled.div`
+  font-weight: ${({ theme }) => theme.font.weight.large};
+  font-size: ${({ theme }) => theme.font.sizes.small};
+`;

@@ -105,7 +105,7 @@ const Carousel = () => {
         <Button
           onClick={() => navigate("/wizard")}
           color="darkYellow"
-          icon={<ChevronRight size={20} />}
+          endIcon={<ChevronRight size={20} />}
           arrow
         >
           VAMOS LÁ!

@@ -17,9 +17,16 @@ export interface ISelect {
   multiple?: boolean;
   showOptions?: boolean;
   onChange: (value: string) => void;
+  id: string;
 }
 
-const Select = ({ placeholder, defaultSelected, items, onChange }: ISelect) => {
+const Select = ({
+  placeholder,
+  defaultSelected,
+  items,
+  onChange,
+  id,
+}: ISelect) => {
   const [showOptions, setShowOptions] = useState(false);
   const [selected, setSelected] = useState(defaultSelected);
   const ref = useRef(null);
@@ -47,7 +54,7 @@ const Select = ({ placeholder, defaultSelected, items, onChange }: ISelect) => {
   }, [selected]);
 
   return (
-    <S.Container ref={ref} onClick={handleContainerClick}>
+    <S.Container id={id} ref={ref} onClick={handleContainerClick}>
       {placeholder && !selected ? (
         <S.Placeholder>{placeholder}</S.Placeholder>
       ) : (

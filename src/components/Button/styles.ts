@@ -21,6 +21,10 @@ const ContainerModifiers = {
   `,
 
   withIcon: (theme: DefaultTheme) => css`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
     svg {
       width: 2rem;
       height: 2rem;
