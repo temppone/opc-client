@@ -46,7 +46,7 @@ const TextField = ({
             onChange={onChange}
             value={value}
             onKeyPress={(event) => {
-              if (!onlyNumber && !/[0-9]/.test(event.key)) {
+              if (onlyNumber && !/[0-9]/.test(event.key)) {
                 event.preventDefault();
               }
             }}
