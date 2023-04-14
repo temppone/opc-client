@@ -84,153 +84,165 @@ const PersonalProviderData = ({
 
   return (
     <S.Container>
-      <S.InputGroupContainer>
-        <Controller
-          control={control}
-          name="providerFullName"
-          render={({ field: { onChange, onBlur, value } }) => (
-            <TextField
-              name="providerFullName"
-              value={value || ""}
-              onChange={onChange}
-              onBlur={onBlur}
-              isError={!!errors.providerFullName}
-              helperText={errors.providerFullName?.message ?? ""}
-              placeholder={fullNameLabel}
-            />
-          )}
-        />
-
-        <Controller
-          control={control}
-          name="providerDocument"
-          render={({ field: { onChange, onBlur, value } }) => (
-            <TextField
-              name="providerDocument"
-              value={cpfCnpjMask(value) || ""}
-              onChange={onChange}
-              onBlur={onBlur}
-              isError={!!errors.providerDocument}
-              helperText={errors.providerDocument?.message ?? ""}
-              placeholder="CPF/CNPJ"
-              maxLength={18}
-            />
-          )}
-        />
-      </S.InputGroupContainer>
-
-      <S.InputGroupContainer>
-        <S.CepContainer>
+      <S.FormContainer>
+        <S.InputGroupContainer>
           <Controller
             control={control}
-            name="providerCep"
+            name="providerFullName"
             render={({ field: { onChange, onBlur, value } }) => (
               <TextField
-                name="providerCep"
-                value={cepMask(value) || ""}
+                name="providerFullName"
+                value={value || ""}
                 onChange={onChange}
                 onBlur={onBlur}
-                isError={!!errors.providerCep}
-                helperText={errors.providerCep?.message ?? ""}
-                placeholder="00000-000"
-                maxLength={9}
-                isLoading={addressSearchIsLoading}
-                buttonChild={
-                  <S.ButtonTextField onClick={() => handleCep()}>
-                    <Search size="2rem" color="white" />
-                  </S.ButtonTextField>
-                }
+                isError={!!errors.providerFullName}
+                helperText={errors.providerFullName?.message ?? ""}
+                placeholder={fullNameLabel}
               />
             )}
           />
-        </S.CepContainer>
 
-        <Controller
-          control={control}
-          name="providerAddress"
-          render={({ field: { onChange, onBlur, value } }) => (
-            <TextField
+          <Controller
+            control={control}
+            name="providerDocument"
+            render={({ field: { onChange, onBlur, value } }) => (
+              <TextField
+                name="providerDocument"
+                value={cpfCnpjMask(value) || ""}
+                onChange={onChange}
+                onBlur={onBlur}
+                isError={!!errors.providerDocument}
+                helperText={errors.providerDocument?.message ?? ""}
+                placeholder="CPF/CNPJ"
+                maxLength={18}
+              />
+            )}
+          />
+        </S.InputGroupContainer>
+
+        <S.InputGroupContainer>
+          <S.CepContainer>
+            <Controller
+              control={control}
+              name="providerCep"
+              render={({ field: { onChange, onBlur, value } }) => (
+                <TextField
+                  name="providerCep"
+                  value={cepMask(value) || ""}
+                  onChange={onChange}
+                  onBlur={onBlur}
+                  isError={!!errors.providerCep}
+                  helperText={errors.providerCep?.message ?? ""}
+                  placeholder="00000-000"
+                  maxLength={9}
+                  isLoading={addressSearchIsLoading}
+                  buttonChild={
+                    <S.ButtonTextField onClick={() => handleCep()}>
+                      <Search size="2rem" color="white" />
+                    </S.ButtonTextField>
+                  }
+                />
+              )}
+            />
+          </S.CepContainer>
+
+          <S.FullWidthTextField>
+            <Controller
+              control={control}
               name="providerAddress"
-              value={value || addressSearchData?.logradouro || ""}
-              onChange={onChange}
-              onBlur={onBlur}
-              isError={!!errors.providerAddress}
-              helperText={errors.providerAddress?.message ?? ""}
-              placeholder="Endereço"
-            />
-          )}
-        />
-
-        <S.AddressDataContainer>
-          <S.UfNumberContainer>
-            <Controller
-              control={control}
-              name="providerState"
               render={({ field: { onChange, onBlur, value } }) => (
                 <TextField
+                  name="providerAddress"
+                  value={value || addressSearchData?.logradouro || ""}
+                  onChange={onChange}
+                  onBlur={onBlur}
+                  isError={!!errors.providerAddress}
+                  helperText={errors.providerAddress?.message ?? ""}
+                  placeholder="Endereço"
+                />
+              )}
+            />
+          </S.FullWidthTextField>
+
+          <S.AddressDataContainer>
+            <S.TwoInputsRow>
+              <S.SmallTextField>
+                <Controller
+                  control={control}
                   name="providerState"
-                  value={value || addressSearchData?.uf || ""}
-                  onChange={onChange}
-                  onBlur={onBlur}
-                  isError={!!errors.providerState}
-                  helperText={errors.providerState?.message ?? ""}
-                  placeholder="UF"
+                  render={({ field: { onChange, onBlur, value } }) => (
+                    <TextField
+                      name="providerState"
+                      value={value || addressSearchData?.uf || ""}
+                      onChange={onChange}
+                      onBlur={onBlur}
+                      isError={!!errors.providerState}
+                      helperText={errors.providerState?.message ?? ""}
+                      placeholder="UF"
+                    />
+                  )}
                 />
-              )}
-            />
+              </S.SmallTextField>
 
-            <Controller
-              control={control}
-              name="providerAddressNumber"
-              render={({ field: { onChange, onBlur, value } }) => (
-                <TextField
-                  name="providerAddressNumber"
-                  value={value || ""}
-                  onChange={onChange}
-                  onBlur={onBlur}
-                  isError={!!errors.providerAddressNumber}
-                  helperText={errors.providerAddressNumber?.message ?? ""}
-                  placeholder="N°"
-                />
-              )}
-            />
-          </S.UfNumberContainer>
-
-          <S.CityComplementContainer>
-            <Controller
-              control={control}
-              name="providerCity"
-              render={({ field: { onChange, onBlur, value } }) => (
-                <TextField
+              <S.FullWidthTextField>
+                <Controller
+                  control={control}
                   name="providerCity"
-                  value={value || addressSearchData?.localidade || ""}
-                  onChange={onChange}
-                  onBlur={onBlur}
-                  isError={!!errors.providerCity}
-                  helperText={errors.providerCity?.message ?? ""}
-                  placeholder="Cidade"
+                  render={({ field: { onChange, onBlur, value } }) => (
+                    <TextField
+                      name="providerCity"
+                      value={value || addressSearchData?.localidade || ""}
+                      onChange={onChange}
+                      onBlur={onBlur}
+                      isError={!!errors.providerCity}
+                      helperText={errors.providerCity?.message ?? ""}
+                      placeholder="Cidade"
+                    />
+                  )}
                 />
-              )}
-            />
+              </S.FullWidthTextField>
+            </S.TwoInputsRow>
 
-            <Controller
-              control={control}
-              name="providerComplement"
-              render={({ field: { onChange, onBlur, value } }) => (
-                <TextField
-                  name="providerComplement"
-                  value={value || ""}
-                  onChange={onChange}
-                  onBlur={onBlur}
-                  isError={!!errors.providerComplement}
-                  helperText={errors.providerComplement?.message ?? ""}
-                  placeholder="Complemento"
+            <S.TwoInputsRow>
+              <S.SmallTextField>
+                <Controller
+                  control={control}
+                  name="providerAddressNumber"
+                  render={({ field: { onChange, onBlur, value } }) => (
+                    <TextField
+                      name="providerAddressNumber"
+                      value={value || ""}
+                      onChange={onChange}
+                      onBlur={onBlur}
+                      isError={!!errors.providerAddressNumber}
+                      helperText={errors.providerAddressNumber?.message ?? ""}
+                      placeholder="N°"
+                    />
+                  )}
                 />
-              )}
-            />
-          </S.CityComplementContainer>
-        </S.AddressDataContainer>
-      </S.InputGroupContainer>
+              </S.SmallTextField>
+
+              <S.FullWidthTextField>
+                <Controller
+                  control={control}
+                  name="providerComplement"
+                  render={({ field: { onChange, onBlur, value } }) => (
+                    <TextField
+                      name="providerComplement"
+                      value={value || ""}
+                      onChange={onChange}
+                      onBlur={onBlur}
+                      isError={!!errors.providerComplement}
+                      helperText={errors.providerComplement?.message ?? ""}
+                      placeholder="Complemento"
+                    />
+                  )}
+                />
+              </S.FullWidthTextField>
+            </S.TwoInputsRow>
+          </S.AddressDataContainer>
+        </S.InputGroupContainer>
+      </S.FormContainer>
 
       <S.QuestionButtons>
         {currentStep !== 0 && (
