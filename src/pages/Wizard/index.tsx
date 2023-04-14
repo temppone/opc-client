@@ -34,10 +34,6 @@ const Wizard = () => {
     loop: false,
   };
 
-  useEffect(() => {
-    console.log({ finalData });
-  }, [finalData]);
-
   const { currentStep } = useContext(WizardContext);
 
   const { data: contractsTypeData, isLoading: contractsTypeIsLoading } =
@@ -211,15 +207,17 @@ const Wizard = () => {
                 generateContract.mutateAsync(finalData || {})
               }
             >
-              <TextField
-                onChange={(data) => {
-                  setDisabled(!data.target.value);
-                  setFinalData({
-                    ...finalData,
-                    [currentQuestion.name]: data.target.value,
-                  });
-                }}
-              />
+              <S.InputQuestionContainer>
+                <TextField
+                  onChange={(data) => {
+                    setDisabled(!data.target.value);
+                    setFinalData({
+                      ...finalData,
+                      [currentQuestion.name]: data.target.value,
+                    });
+                  }}
+                />
+              </S.InputQuestionContainer>
             </Question>
           ) : null}
 
@@ -231,16 +229,18 @@ const Wizard = () => {
               disabled={disabled || false}
               question={currentQuestion?.question_label}
             >
-              <TextField
-                onlyNumber
-                onChange={(data) => {
-                  setDisabled(!data.target.value);
-                  setFinalData({
-                    ...finalData,
-                    [currentQuestion.name]: data.target.value,
-                  });
-                }}
-              />
+              <S.InputQuestionContainer>
+                <TextField
+                  onlyNumber
+                  onChange={(data) => {
+                    setDisabled(!data.target.value);
+                    setFinalData({
+                      ...finalData,
+                      [currentQuestion.name]: data.target.value,
+                    });
+                  }}
+                />
+              </S.InputQuestionContainer>
             </Question>
           ) : null}
         </Fragment>
