@@ -23,6 +23,11 @@ export const ReactSelectContainer = styled.div`
   }
 `;
 
+export const InputQuestionContainer = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
 export const SuccessContainer = styled.div`
   display: flex;
   flex-direction: column;

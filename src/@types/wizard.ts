@@ -8,6 +8,7 @@ export interface IFinalData {
   projectDuration?: string;
   observation?: string;
   projectValue?: string;
+  contractId?: string;
 }
 
 export interface IContractFormResponse {

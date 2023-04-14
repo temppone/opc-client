@@ -6,14 +6,29 @@ export const Container = styled.div`
   gap: 48px;
 `;
 
+export const FormContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0 auto;
+`;
+
 export const InputGroupContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 8px;
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.sm}) {
+    width: 300px;
+  }
 `;
 
 export const ButtonTextField = styled.div`
   padding: 0.9rem;
+`;
+
+export const FullWidthTextField = styled.div`
+  width: 100%;
 `;
 
 export const CepContainer = styled.div`
@@ -36,7 +51,11 @@ export const CityComplementContainer = styled.div`
 
 export const AddressDataContainer = styled.div`
   display: flex;
-  gap: 8px;
+  flex-direction: column;
+`;
+
+export const SmallTextField = styled.div`
+  width: 99px;
 `;
 
 export const QuestionButtons = styled.div`
@@ -51,4 +70,10 @@ export const NextButton = styled.div`
   width: 100%;
   display: flex;
   justify-content: flex-end;
+`;
+
+export const TwoInputsRow = styled.div`
+  width: 100%;
+  display: flex;
+  gap: 8px;
 `;
