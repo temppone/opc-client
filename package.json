@@ -36,7 +36,7 @@
     "yup": "^1.0.2"
   },
   "scripts": {
-    "dev": "react-scripts start",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "eject": "react-scripts eject",
     "test": "jest",
