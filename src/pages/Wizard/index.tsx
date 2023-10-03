@@ -229,7 +229,6 @@ const Wizard = () => {
             >
               <S.InputQuestionContainer>
                 <TextField
-                  onlyNumber
                   onChange={(data) => {
                     setDisabled(!data.target.value);
                     setFinalData({
