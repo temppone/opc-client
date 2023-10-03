@@ -39,6 +39,6 @@ Ao contribuir será criado um vínculo com a comunidade open source, na qual tod
 
 ## Links
 
-[Figma](https://www.figma.com/file/siyKHMSLlf7sMBWuuEQfuR/opc)
-[API](https://github.com/temppone/opc-api)
-[DEMO](https://opc-client-w4mp-git-main-temppone.vercel.app/)
+- [Figma](https://www.figma.com/file/siyKHMSLlf7sMBWuuEQfuR/opc)
+- [API](https://github.com/temppone/opc-api)
+- [DEMO](https://opc-client-w4mp-git-main-temppone.vercel.app/)
