@@ -11,6 +11,18 @@ export const Container = styled.div`
   ${({ theme }) => css`
     padding: ${theme.spacings.small};
   `}
+
+  animation: fadeIn 1s;
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
+    }
+  }
 `;
 
 export const Label = styled.div`

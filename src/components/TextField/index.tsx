@@ -12,7 +12,6 @@ export type IInput = {
   isError?: boolean;
   helperText?: string;
   isLoading?: boolean;
-  onlyNumber?: boolean;
 } & React.InputHTMLAttributes<HTMLInputElement>;
 
 const TextField = ({
@@ -26,7 +25,6 @@ const TextField = ({
   isError,
   isLoading,
   helperText,
-  onlyNumber,
   ...props
 }: IInput) => {
   const [value, setValue] = useState(initialValue);
@@ -41,17 +39,7 @@ const TextField = ({
       <S.Container>
         {!!label && <S.Label htmlFor={labelFor}>{label}</S.Label>}
         <S.InputContainer isError={isError} buttonChild={buttonChild}>
-          <S.Input
-            type="text"
-            onChange={onChange}
-            value={value}
-            onKeyPress={(event) => {
-              if (!onlyNumber && !/[0-9]/.test(event.key)) {
-                event.preventDefault();
-              }
-            }}
-            {...props}
-          />
+          <S.Input type="text" onChange={onChange} value={value} {...props} />
           {!!icon && <S.Icon>{icon}</S.Icon>}
         </S.InputContainer>
         {!!buttonChild && (

@@ -1,12 +1,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { Download } from "@styled-icons/material";
 import br from "date-fns/locale/pt-BR";
-import { Fragment, useContext, useEffect, useState } from "react";
+import { Fragment, useContext, useState } from "react";
 import { registerLocale } from "react-datepicker";
 import { toast } from "react-hot-toast";
+import Lottie from "react-lottie";
 import ReactSelect from "react-select";
 import { useTheme } from "styled-components";
 import { IFinalData } from "../../@types/wizard";
 import { splashSuccess } from "../../assets/Lotties/splashSuccess";
+import Button from "../../components/Button";
 import PersonalCustomerData from "../../components/PersonalCustomerData";
 import PersonalProviderData, {
   IPersonalProviderForm,
@@ -18,9 +21,6 @@ import { useContractForm } from "../../services/hooks/contracts/useContractForm"
 import { useContractTypes } from "../../services/hooks/contracts/useContractTypes";
 import { useGenerateContract } from "../../services/hooks/contracts/useGenerateContract";
 import * as S from "./styles";
-import Lottie from "react-lottie";
-import Button from "../../components/Button";
-import { Download } from "@styled-icons/material";
 
 registerLocale("br", br);
 
@@ -147,8 +147,6 @@ const Wizard = () => {
                 onChange={(e) => {
                   setDisabled(!e?.type);
 
-                  console.log(e?.id);
-                  console.log(e?.type);
                   handleChangeFinalData({
                     type: e?.type,
                     contractId: e?.id,
@@ -231,7 +229,6 @@ const Wizard = () => {
             >
               <S.InputQuestionContainer>
                 <TextField
-                  onlyNumber
                   onChange={(data) => {
                     setDisabled(!data.target.value);
                     setFinalData({
