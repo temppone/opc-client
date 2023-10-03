@@ -2,7 +2,7 @@
 import axios, { AxiosError } from "axios";
 import { toast } from "react-hot-toast";
 
-const baseURL = process.env.REACT_APP_API_BASEURL;
+const baseURL = import.meta.env.VITE_API_BASEURL;
 
 export const api = axios.create({
   baseURL,
