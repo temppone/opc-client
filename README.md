@@ -1,7 +1,5 @@
 # Gerador de contratos
 
-Projeto desenvolvido com a comunidade [He4rt](https://heartdevs.com/)
-
 ## Conhecimentos para contribuir
 
 - Ecossistema React.js
