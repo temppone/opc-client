@@ -1,39 +1,39 @@
-# Gerador de contratos
+# Contract Generator
 
-## Conhecimentos para contribuir
+## Knowledge to Contribute
 
-- Ecossistema React.js
+- React.js Ecosystem
 
-## Iniciando
+## Getting Started
 
-Para fazer uma cópia e rodar o projeto localmente, siga os seguintes passos.
+To make a copy and run the project locally, follow these steps.
 
-## Pré-requisitos
+## Prerequisites
 
-Os programas a seguir são necessários para a utilização e modificação do projeto.
+The following programs are necessary for the use and modification of the project.
 
 - [Git](https://git-scm.com/)
 
-## Instalação
+## Installation
 
-Faça um clone do repositório utilizando:
+Clone the repository using:
 
 ```sh
 git clone https://github.com/temppone/opc/
 ```
 
-## Como Contribuir
+## How to Contribute
 
-Ao contribuir será criado um vínculo com a comunidade open source, na qual todos, incluindo você, utilizam todos os dias para aprender e criar seus projetos.
+By contributing, you will create a bond with the open source community, where everyone, including you, uses it every day to learn and create their projects.
 
-1. Faça um Fork do projeto
-2. Selecione uma issue e coloque seu nome nela. Crie uma branch sempre que houver uma nova feature ou fix (`git checkout -b 'feat/loveReact'`)
-3. Faça seu Commit (`git commit -m 'feat: adding some stuff'`)
-4. Faça Push no seu Branch (`git push origin 'feat/loveReact'`)
-5. Abra um Pull Request
+1. Fork the project
+2. Select an issue and put your name on it. Create a branch whenever there is a new feature or fix (`git checkout -b 'feat/loveReact'`)
+3. Commit your changes (`git commit -m 'feat: adding some stuff'`)
+4. Push to your branch (`git push origin 'feat/loveReact'`)
+5. Open a Pull Request
 
-- **Extra:** Nós utilizamos o Github para organização de tarefas, ele é público e você pode acessá-lo [aqui](https://github.com/temppone/opc/issues)
-- **As telas foram desenvolvidas em mobile first**
+- **Extra:** We use GitHub for task organization, it is public and you can access it [here](https://github.com/temppone/opc/issues)
+- **The screens were developed with a mobile-first approach**
 
 ## Links
 
